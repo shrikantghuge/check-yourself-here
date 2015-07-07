@@ -16,7 +16,9 @@
 			Exam.mainSectionRegions.show(new Exam.TheStudentLoginView());
 		},
 		showHome : function() {
-			console.info('this section for hjome');
+			console.info('this section for home');
+			Exam.mainSectionRegions.show(new Exam.MainSectionView());
+			
 		}
 	});
 	

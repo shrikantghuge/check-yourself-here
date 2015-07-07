@@ -22,5 +22,4 @@
     <servlet-name>Jersey REST Service</servlet-name>  
     <url-pattern>/exam/*</url-pattern>  
   </servlet-mapping>
-  
 </web-app>

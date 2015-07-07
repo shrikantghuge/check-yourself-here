@@ -7,8 +7,20 @@
 		tagName : 'ul'
 	});
 	Exam.MainSectionView = Marionette.ItemView.extend({
-		template : '#main-section-template'
+		template : '#main-section-template',
+		events :{
+			"click #trainerSignUpbutton" : "openTrainerSignupTemplate",
+			"click #studentSignUpbutton" : "openStudentSignupTemplate"
+		},
+		openTrainerSignupTemplate : function(){
+			Exam.mainSectionRegions.show(new Exam.TrainerSignupView());
+			
+		},
+		openStudentSignupTemplate : function(){
+			
+		}
 	});
+	
 	Exam.TheFooterView = Marionette.ItemView.extend({
 		template : '#the-footer-template'
 	});
@@ -35,7 +47,6 @@
 					id: document.getElementById("trainerId").value,
 					trainerPassword : document.getElementById("trainerPassword").value					
 				});
-				
 				Exam.checktrainerCredentials(trainer);
 			}			
 		}
@@ -49,4 +60,9 @@
 	});
 	Exam.InvalidUserView= Marionette.ItemView.extend({
 		template : '#invalidUser-template'
+	});
+	
+	/*Trainer Signup View*/
+	Exam.TrainerSignupView = Marionette.ItemView.extend({
+		template : '#trainerSignUp-template'
 	});

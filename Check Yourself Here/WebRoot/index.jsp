@@ -64,10 +64,10 @@
 	</script>
 	<script type="text/template" id="main-section-template">
 		<div id="trainerSignUpLink">
-			<label for="trainerSignupView">Trainer SignUP</label>
+			<input type="button" value="Trainer Sign UP" id="trainerSignUpbutton"/> <label>Click <a href="#trainer">here</a>  to login </label>
 		</div>
 		<div id="traineeSignUPLink">
-			<label for="traineeSignUPLink"> Trainee SignUP</label>
+			<input type="button" value="Student Sign UP" id="studentSignUpbutton"/> <label>Click <a href="#student"> here </a> to login </label>
 		</div>
 	</script>
 	<script type="text/template" id="the-footer-template">
@@ -129,6 +129,8 @@
 	<script type="text/template" id="invalidUser-template">
 		Your Username or Password is not correct
 	</script>
-	
+	<script type="text/template" id="trainerSignUp-template">
+		trainerSignUp-template 
+	</script>
 </body>
 </html>
