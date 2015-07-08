@@ -19,6 +19,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 	public ExamDAOServicesImpl() throws SQLException, ServicesNotFoundException {
 		con=ConnectionProvider.getConnection();
 	}
+	/*
 	@Override
 	public String insertExam(Exam exam) throws SQLException {
 		try{
@@ -51,19 +52,19 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 			if(con!=null) con.close();
 		}
 	}
-
+ 	*/
 	@Override
-	public boolean insertTrainer(Trainer trainer) throws SQLException {
+	public String insertTrainer(Trainer trainer) throws SQLException {
 		try{
-			pstmt=con.prepareStatement("insert into Trainer(trainerId,trainerName,speciality,trainerEmailId,trainerMobileNo,trainerPassword) values(?,?,?,?,?,?)");
-			pstmt.setInt(1, trainer.getTrainerId());
-			pstmt.setString(2, trainer.getTrainerName());
-			pstmt.setString(3, trainer.getSpeciality());
-			pstmt.setString(4, trainer.getTrainerEmailId());
-			pstmt.setLong(5, trainer.getTrainerMobileNo());
-			pstmt.setString(6, trainer.getTrainerPassword());
+			pstmt=con.prepareStatement("insert into Trainer(ID,name,address,email,contactNumber,password) values(?,?,?,?,?,?)");
+			pstmt.setString(1, trainer.getId());
+			pstmt.setString(2, trainer.getName());
+			pstmt.setString(3, trainer.getAddress());
+			pstmt.setString(4, trainer.getEmail());
+			pstmt.setLong(5, trainer.getContactNumber());
+			pstmt.setString(6, trainer.getPassword());
 			pstmt.executeUpdate();
-			return true;
+			return "shghuge";
 		}
 		finally{
 			if(pstmt!=null)	pstmt.close();
@@ -71,6 +72,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		}
 	}
 
+	/*	
 	@Override
 	public boolean insertQuestions(List<Question> questions,Section section)
 			throws SQLException {
@@ -397,7 +399,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		// TODO Auto-generated method stub
 		return false;
 	}
-}
+*/}
 
 //TODO: Connection pool
 //TODO : Excelsheel reading method 

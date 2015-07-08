@@ -1,23 +1,14 @@
 package com.zensar.shrikantexamsystem.zenemsservices;
+
 import java.sql.SQLException;
 import java.util.List;
-import com.zensar.shrikantexamsystem.beans.Exam;
-import com.zensar.shrikantexamsystem.beans.Question;
-import com.zensar.shrikantexamsystem.beans.Section;
-import com.zensar.shrikantexamsystem.beans.Trainee;
+import java.util.Random;
+
 import com.zensar.shrikantexamsystem.beans.Trainer;
-import com.zensar.shrikantexamsystem.exceptions.ExamAlreadyPresentException;
-import com.zensar.shrikantexamsystem.exceptions.ExamNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.InvalidPasswordException;
-import com.zensar.shrikantexamsystem.exceptions.QuestionsNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.SectionAlreadyPresentException;
-import com.zensar.shrikantexamsystem.exceptions.SectionNotFoundException;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.StudentsNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.TraineeNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.TrainerNotFoundException;
 import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServices;
 import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServicesImpl;
+
 public class ExamServicesImpl implements ExamServices{
 	ExamDAOServices emsdaoServices;
 	public ExamServicesImpl() throws ServicesNotFoundException {
@@ -29,12 +20,15 @@ public class ExamServicesImpl implements ExamServices{
 		}
 	}
 	@Override
-	public boolean acceptTrainer(Trainer trainer)
-			throws ServicesNotFoundException {
-		// TODO Auto-generated method stub
-		return false;
+	public String acceptTrainer(Trainer trainer) throws SQLException{
+		if(trainer!=null && trainer.getName().length()>0){
+			String id = getId(trainer.getName(), 0);
+			trainer.setId(id);
+		}
+		emsdaoServices.insertTrainer(trainer);
+		return "error";
 	}
-	@Override
+	/*@Override
 	public boolean acceptExam(Exam exam) throws ServicesNotFoundException,
 			TrainerNotFoundException, ExamAlreadyPresentException {
 		// TODO Auto-generated method stub
@@ -187,5 +181,23 @@ public class ExamServicesImpl implements ExamServices{
 	}
 	public Section getSection(Exam exam,int sectionId){
 		return null;
+	}
+*/
+	private String getId(String name, int index){
+		String nameWOSpaces="";
+		for(Character ch : name.toCharArray()){
+			if(ch.toString() != " "){
+				nameWOSpaces = nameWOSpaces + ch;
+			}
+		}
+		System.out.println("Name without spaces is :"+nameWOSpaces);
+		if(nameWOSpaces.length()<7){
+			RandomString randomString = new RandomString(7-nameWOSpaces.length());
+			return nameWOSpaces +  randomString.nextString();
+		}else if(nameWOSpaces.substring(index,index+7).length()<7){
+			return getId(nameWOSpaces.substring(index,index+7), index);
+		}else{
+			return nameWOSpaces.substring(index,index+7);
+		}
 	}
 }

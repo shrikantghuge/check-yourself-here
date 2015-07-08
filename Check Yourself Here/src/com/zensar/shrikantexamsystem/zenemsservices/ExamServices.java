@@ -1,23 +1,12 @@
 package com.zensar.shrikantexamsystem.zenemsservices;
-import java.util.List;
-import com.zensar.shrikantexamsystem.beans.Exam;
-import com.zensar.shrikantexamsystem.beans.Question;
-import com.zensar.shrikantexamsystem.beans.Section;
-import com.zensar.shrikantexamsystem.beans.Trainee;
+import java.sql.SQLException;
+
 import com.zensar.shrikantexamsystem.beans.Trainer;
-import com.zensar.shrikantexamsystem.exceptions.ExamAlreadyPresentException;
-import com.zensar.shrikantexamsystem.exceptions.ExamNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.InvalidPasswordException;
-import com.zensar.shrikantexamsystem.exceptions.QuestionsNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.SectionAlreadyPresentException;
-import com.zensar.shrikantexamsystem.exceptions.SectionNotFoundException;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.StudentsNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.TraineeNotFoundException;
-import com.zensar.shrikantexamsystem.exceptions.TrainerNotFoundException;
+
 public interface ExamServices {
-	public boolean acceptTrainer(Trainer trainer) throws ServicesNotFoundException;
-	public boolean acceptExam(Exam exam) throws  ServicesNotFoundException,TrainerNotFoundException,ExamAlreadyPresentException;
+	public String acceptTrainer(Trainer trainer) throws ServicesNotFoundException, SQLException;
+	/*public boolean acceptExam(Exam exam) throws  ServicesNotFoundException,TrainerNotFoundException,ExamAlreadyPresentException;
 	public boolean acceptSection(Exam exam,Section section) throws ExamNotFoundException,SectionAlreadyPresentException;
 	public List<Exam> getAllExamDetails()throws ServicesNotFoundException;
 	public Exam getExamDetails(Exam exam) throws ExamNotFoundException,ServicesNotFoundException;
@@ -36,4 +25,4 @@ public interface ExamServices {
 	public boolean getTrainerLoginDetails(Trainer trainer) throws TrainerNotFoundException,InvalidPasswordException,ServicesNotFoundException;
 	public boolean getTraineeLoginDetails(int examId,Trainee trainee) throws TraineeNotFoundException,InvalidPasswordException ,ServicesNotFoundException;
 	public boolean giveExam(Trainee trainee,Exam exam,Section section,List<Question> userPaper) throws ExamNotFoundException,ServicesNotFoundException,SectionNotFoundException,QuestionsNotFoundException;
-}
+*/}

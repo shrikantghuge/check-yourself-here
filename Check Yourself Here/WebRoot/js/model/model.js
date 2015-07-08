@@ -12,15 +12,7 @@
 	});
 	
 	Exam.Trainer = Backbone.Model.extend({
-	urlRoot : '/ShrikantExamSystem/exam/trainer',
-	defaults : {
-		id:100,
-		trainerName:'Shriaknt',
-		speciality:'software dev',
-		trainerEmailId : 'shghuge@cisco.com',
-		trainerMobileNo : 7894561234,
-		trainerPassword : 'shri'
-	} ,
+	urlRoot : './exam/trainer/newRegistration',
 	initialize : function(){
 		console.log("Trainer model has been initialized");
 	}

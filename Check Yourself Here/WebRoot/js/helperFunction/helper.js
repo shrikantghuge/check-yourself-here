@@ -27,5 +27,17 @@ Exam.checktrainerCredentials = function(trainer) {
 		}
 	});
 };
+
+/*Save new Trainer details and retrieve trainer Id    */
+Exam.saveNewTrainer = function(trainer){
+	console.log("into save trainer method"+trainer);
+	trainer.save({
+		success :function(model){
+			console.log("trainer has been saved successfully .."+model.toJSON.id);
+		}
+		
+	});
+};
+
 	
 	

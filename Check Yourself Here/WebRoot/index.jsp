@@ -1,48 +1,48 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<title>Zensar Exam System</title>
-<link rel="stylesheet" href="css/main.css">
-
-<!--  JavaScript -->
-<script src="js/jquery-1.9.1.js">	
-</script>
-<script src="js/underscore-1.7.js">	
-</script>
-<script src="js/backbone-1.1.2.js">	
-</script>
-<script src="js/backbone.marionette-1.8.js">	
-</script>
-<script>
-	Exam = new Marionette.Application();
-	//Add Region Section
-	Exam.addRegions({
-		topHeaderRegions : '#topHeader',
-		topMenuRegions : '#topMenu',
-		mainSectionRegions : '#mainSection',
-		theFooterRegions : '#theFooter'
-	});	
-</script>
-<script src="js/model/model.js"></script>
-<script src="js/router/router.js"></script>
-<script src="js/view/view.js"></script>
-<script src="js/helperFunction/helper.js"></script>
-<script>
-	//Required for application to start 
-	Exam.on('initialize:after', function() {
-		new Exam.MainRouter({
-			controller : new Exam.PortalController()
+	<meta charset="utf-8" />
+	<title>Zensar Exam System</title>
+	<link rel="stylesheet" href="css/main.css">
+	
+	<!--  JavaScript -->
+	<script src="js/jquery-1.9.1.js">	
+	</script>
+	<script src="js/underscore-1.7.js">	
+	</script>
+	<script src="js/backbone-1.1.2.js">	
+	</script>
+	<script src="js/backbone.marionette-1.8.js">	
+	</script>
+	<script>
+		Exam = new Marionette.Application();
+		//Add Region Section
+		Exam.addRegions({
+			topHeaderRegions : '#topHeader',
+			topMenuRegions : '#topMenu',
+			mainSectionRegions : '#mainSection',
+			theFooterRegions : '#theFooter'
+		});	
+	</script>
+	<script src="js/model/model.js"></script>
+	<script src="js/router/router.js"></script>
+	<script src="js/view/view.js"></script>
+	<script src="js/helperFunction/helper.js"></script>
+	<script>
+		//Required for application to start 
+		Exam.on('initialize:after', function() {
+			new Exam.MainRouter({
+				controller : new Exam.PortalController()
+			});
 		});
-	});
-	Exam.on('start', function() {
-		console.info("exam is started");
-		Backbone.history.start();
-	});
-	$(function() {
-		Exam.start();
-	});
-</script>
+		Exam.on('start', function() {
+			console.info("exam is started");
+			Backbone.history.start();
+		});
+		$(function() {
+			Exam.start();
+		});
+	</script>
 </head>
 <body>
 	<header id="topHeader"> </header>
@@ -130,7 +130,33 @@
 		Your Username or Password is not correct
 	</script>
 	<script type="text/template" id="trainerSignUp-template">
-		trainerSignUp-template 
-	</script>
+		<div>
+			<label for="trainerName">Enter Name :</label>
+			<input type="text" id = "trainerName">
+		</div>
+		<div>
+			<label for="trainerContactNo">Enter Mobile Number :</label>
+			<input type="number" id="trainerContactNo">
+		</div>
+		<div>
+			<label for="trainerEmail">Enter Email Address :</label>
+			<input type="text" id="trainerEmail">		
+		</div>	
+		<div>
+			<label for="trainerAddress">Enter Trainer Address :</label>
+			<input type="text" id="trainerAddress">
+		</div>
+		<div>
+			<label for="trainerPassword">Enter Password :</label>
+			<input type="password" id="trainerPassword">
+		</div>
+		<div>
+			<label for="trainerPasswordConfirm">Re-enter Password :</label>
+			<input type="password" id="trainerPasswordConfirm">
+		</div> 
+		<div>
+			<input type="button" id="submitNewTrainer" value="Submit">
+		</div>
+	</script>	
 </body>
 </html>

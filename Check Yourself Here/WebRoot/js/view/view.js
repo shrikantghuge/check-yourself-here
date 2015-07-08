@@ -64,5 +64,18 @@
 	
 	/*Trainer Signup View*/
 	Exam.TrainerSignupView = Marionette.ItemView.extend({
-		template : '#trainerSignUp-template'
+		template : '#trainerSignUp-template',
+		events :{
+			"click #submitNewTrainer" : function() {
+				console.log("new trainer registration started : into  TrainerSignupView view");
+				var trainer = new Exam.Trainer({					
+					name : document.getElementById("trainerName").value,
+					contactNumber: document.getElementById("trainerContactNo").value,
+					email: document.getElementById("trainerEmail").value,
+					address: document.getElementById("trainerAddress").value,
+					trainerPassword: document.getElementById("trainerPassword").value
+				});
+				Exam.saveNewTrainer(trainer);
+			}
+		}
 	});
