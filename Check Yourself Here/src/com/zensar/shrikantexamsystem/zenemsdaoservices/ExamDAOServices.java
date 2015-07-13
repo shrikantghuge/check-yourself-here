@@ -14,8 +14,8 @@ public interface ExamDAOServices {
 	public List<Exam> retrieveExams(int trainerId) throws SQLException;
 	public List<Section> retrieveSections(int examId) throws SQLException;
 	public List<Trainee> retrieveTrainees(int examId) throws SQLException;
-	public Section retrieveSection(int examId,int sectionId) throws SQLException;
-	public Trainee retrieveTrainee(int examId,int traineeId) throws SQLException;	
+	public Section retrieveSection(int examId,int sectionId) throws SQLException;*/
+	public Trainer retrieveTrainee(String traineeId) throws SQLException;	/*
 	public boolean updateExam(Exam exam) throws SQLException;
 	public boolean updateTrainer(Trainer trainer) throws SQLException;
 	public boolean updateSection(Section section) throws SQLException;	

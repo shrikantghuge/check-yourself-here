@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+
 import com.zensar.shrikantexamsystem.beans.*;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
 import com.zensar.shrikantexamsystem.serviceprovider.ConnectionProvider;
@@ -68,7 +69,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		}
 		finally{
 			if(pstmt!=null)	pstmt.close();
-			if(con!=null) con.close();
+			//if(con!=null) con.close();
 		}
 	}
 
@@ -227,30 +228,25 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 			if(rs!=null) rs.close();
 			if(stmt!=null) stmt.close();
 		}
-	}
+	}*/
 
 	@Override
-	public Trainee retrieveTrainee(int examId, int traineeId)throws SQLException {
+	public Trainer retrieveTrainee(String traineeId)throws SQLException {
 		Connection conn=con;
 		Statement stmt= conn.createStatement();
 		ResultSet rs=null;
-		try {
-			ArrayList<Score> scores = new ArrayList<Score>();
-			rs = stmt.executeQuery("select * from score where traineeId="+traineeId);
-			while(rs.next()){
-				scores.add(new Score(traineeId, rs.getInt("obtainedMarks"), retrieveSection(examId, rs.getInt("sectionId")), rs.getString("status")));
-			}		
-			rs= stmt.executeQuery("select t.traineeId,t.traineeName,t.traineeMobileNo ,t.traineeEmailId,t.traineePassword,r.grade,r.percentage,r.totalMaxMarks,r.totalObtainedMarks from trainee t inner join result r on t.traineeId=r.traineeId where t.traineeId ="+traineeId);
-			if(rs.next()) return new Trainee(traineeId, rs.getString(2), rs.getLong(3), rs.getString(4), rs.getString(5), new Result(rs.getString(6), rs.getDouble(7), rs.getInt(8), rs.getInt(9), scores));
+		try {			
+			rs = stmt.executeQuery("select * from trainer where Id='"+traineeId+"'");
+			if(rs.next()) return new Trainer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), null, rs.getLong(5), rs.getString(6));
 			else return null;
 		} finally{
-			if(conn!=null) conn.close();
+			//if(conn!=null) conn.close();
 			if(rs!=null) rs.close();
 			if(stmt!=null) stmt.close();
 		}
 	}
 
-	@Override
+	/*@Override
 	public boolean updateExam(Exam exam) throws SQLException {
 		try {
 			pstmt = con.prepareStatement("update exam set examName=? where examId = ?");

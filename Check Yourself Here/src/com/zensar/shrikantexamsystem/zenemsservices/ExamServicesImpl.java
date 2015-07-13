@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
+import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
 import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServices;
@@ -20,12 +21,10 @@ public class ExamServicesImpl implements ExamServices{
 		}
 	}
 	@Override
-	public String acceptTrainer(Trainer trainer) throws SQLException{
-		if(trainer!=null && trainer.getName().length()>0){
-			String id = getId(trainer.getName(), 0);
+	public String acceptTrainer(Trainer trainer) throws SQLException{	
+			String id = getTrainerId(trainer,0);
 			trainer.setId(id);
-		}
-		emsdaoServices.insertTrainer(trainer);
+			emsdaoServices.insertTrainer(trainer);
 		return "error";
 	}
 	/*@Override
@@ -183,21 +182,26 @@ public class ExamServicesImpl implements ExamServices{
 		return null;
 	}
 */
-	private String getId(String name, int index){
-		String nameWOSpaces="";
-		for(Character ch : name.toCharArray()){
-			if(ch.toString() != " "){
-				nameWOSpaces = nameWOSpaces + ch;
-			}
-		}
-		System.out.println("Name without spaces is :"+nameWOSpaces);
-		if(nameWOSpaces.length()<7){
-			RandomString randomString = new RandomString(7-nameWOSpaces.length());
-			return nameWOSpaces +  randomString.nextString();
-		}else if(nameWOSpaces.substring(index,index+7).length()<7){
-			return getId(nameWOSpaces.substring(index,index+7), index);
-		}else{
-			return nameWOSpaces.substring(index,index+7);
-		}
+	private String getTrainerId(Trainer trainerParam,int index) throws SQLException{
+		Trainer trainer = new Trainer("", trainerParam.getName(), "", "", null, 0, "");
+		String resultString="";
+		do{
+			String nameWOSpaces=trainer.getName().replaceAll("\\s+", "");			
+			System.out.println("Name without spaces is :"+nameWOSpaces);
+			if(nameWOSpaces.length()<7){
+				RandomString randomString = new RandomString(7-nameWOSpaces.length());
+				resultString= nameWOSpaces +  randomString.nextString();
+			}else if(nameWOSpaces.substring(index,nameWOSpaces.length()).length()<7){
+				//getTrainerId(new Trainer("", nameWOSpaces.substring(index,nameWOSpaces.length()), "", "", null, 0, ""), index);
+				trainer.setName(nameWOSpaces.substring(index,nameWOSpaces.length()));
+			}else{
+				resultString = nameWOSpaces.substring(index,index+7);
+				index++;
+			}			
+			System.out.println("The result string is "+resultString +" And data retrived"+emsdaoServices.retrieveTrainee(resultString));
+			
+		}while(emsdaoServices.retrieveTrainee(resultString)!=null);
+		return resultString;
 	}
 }
+
