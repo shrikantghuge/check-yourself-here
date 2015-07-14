@@ -21,11 +21,10 @@ public class ExamServicesImpl implements ExamServices{
 		}
 	}
 	@Override
-	public String acceptTrainer(Trainer trainer) throws SQLException{	
+	public String acceptTrainer(Trainer trainer) throws Exception{	
 			String id = getTrainerId(trainer,0);
-			trainer.setId(id);
-			emsdaoServices.insertTrainer(trainer);
-		return "error";
+			trainer.setId(id);			
+		return emsdaoServices.insertTrainer(trainer);
 	}
 	/*@Override
 	public boolean acceptExam(Exam exam) throws ServicesNotFoundException,

@@ -5,7 +5,7 @@ import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
 
 public interface ExamServices {
-	public String acceptTrainer(Trainer trainer) throws ServicesNotFoundException, SQLException;
+	public String acceptTrainer(Trainer trainer) throws ServicesNotFoundException, SQLException, Exception;
 	/*public boolean acceptExam(Exam exam) throws  ServicesNotFoundException,TrainerNotFoundException,ExamAlreadyPresentException;
 	public boolean acceptSection(Exam exam,Section section) throws ExamNotFoundException,SectionAlreadyPresentException;
 	public List<Exam> getAllExamDetails()throws ServicesNotFoundException;

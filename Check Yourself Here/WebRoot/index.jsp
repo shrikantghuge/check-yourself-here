@@ -63,11 +63,14 @@
 			<li><a href="#trainer">Trainer Login</a></li>
 	</script>
 	<script type="text/template" id="main-section-template">
-		<div id="trainerSignUpLink">
-			<input type="button" value="Trainer Sign UP" id="trainerSignUpbutton"/> <label>Click <a href="#trainer">here</a>  to login </label>
+		<div>
+			<input type="button" value="Sign UP" id="signUpbutton"/> 
 		</div>
-		<div id="traineeSignUPLink">
-			<input type="button" value="Student Sign UP" id="studentSignUpbutton"/> <label>Click <a href="#student"> here </a> to login </label>
+		<div id="trainerSigninLink">
+			<label>Click <a href="#trainer">here</a>  to login </label>
+		</div>
+		<div id="traineeSigninLink">
+			<label>Click <a href="#student"> here </a> to login </label>
 		</div>
 	</script>
 	<script type="text/template" id="the-footer-template">
@@ -129,34 +132,47 @@
 	<script type="text/template" id="invalidUser-template">
 		Your Username or Password is not correct
 	</script>
-	<script type="text/template" id="trainerSignUp-template">
+	<script type="text/template" id="signUp-template">
 		<div>
-			<label for="trainerName">Enter Name :</label>
-			<input type="text" id = "trainerName">
+			<label>You are a </label>
+			<select id="trainerOrStudent">
+				<option id="0" selected="selected">Select One..</option>
+				<option id="trainer">Trainer</option>
+				<option id="student">Student</option>
+			</select>
+		<div>
+		<div>
+			<label for="signUpName">Enter Name :</label>
+			<input type="text" id = "signUpName">
 		</div>
 		<div>
-			<label for="trainerContactNo">Enter Mobile Number :</label>
-			<input type="number" id="trainerContactNo">
+			<label for="signUpContactNo">Enter Mobile Number :</label>
+			<input type="number" id="signUpContactNo">
 		</div>
 		<div>
-			<label for="trainerEmail">Enter Email Address :</label>
-			<input type="text" id="trainerEmail">		
+			<label for="signUpEmail">Enter Email Address :</label>
+			<input type="text" id="signUpEmail">		
 		</div>	
 		<div>
-			<label for="trainerAddress">Enter Trainer Address :</label>
-			<input type="text" id="trainerAddress">
+			<label for="signUpAddress">Enter Address :</label>
+			<input type="text" id="signUpAddress">
 		</div>
 		<div>
-			<label for="trainerPassword">Enter Password :</label>
-			<input type="password" id="trainerPassword">
+			<label for="signUpPassword">Enter Password :</label>
+			<input type="password" id="signUpPassword">
 		</div>
 		<div>
-			<label for="trainerPasswordConfirm">Re-enter Password :</label>
-			<input type="password" id="trainerPasswordConfirm">
+			<label for="signUpPasswordConfirm">Re-enter Password :</label>
+			<input type="password" id="signUpPasswordConfirm">
 		</div> 
 		<div>
-			<input type="button" id="submitNewTrainer" value="Submit">
+			<input type="button" id="submitNewsignUp" value="Submit">
 		</div>
 	</script>	
+	<script type="text/template" id="signUpSuccessTemplate">
+		<label> Your ID is : <@= id  @> </label> </br> 
+		<label> click <a href="#home">HERE</a> to login!!</label>
+	</script>
+	
 </body>
 </html>

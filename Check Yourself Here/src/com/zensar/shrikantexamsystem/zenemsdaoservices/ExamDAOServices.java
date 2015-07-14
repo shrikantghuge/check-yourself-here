@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import com.zensar.shrikantexamsystem.beans.Trainer;
 
 public interface ExamDAOServices {
-	public String insertTrainer(Trainer trainer) throws SQLException;
+	public String insertTrainer(Trainer trainer) throws SQLException, Exception;
 	/*
 	public String insertExam(Exam exam) throws SQLException;
 	boolean insertSection(Exam exam, Section section) throws SQLException;	

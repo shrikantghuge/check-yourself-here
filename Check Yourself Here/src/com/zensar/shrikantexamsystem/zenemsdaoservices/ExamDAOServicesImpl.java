@@ -55,17 +55,25 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 	}
  	*/
 	@Override
-	public String insertTrainer(Trainer trainer) throws SQLException {
+	public String insertTrainer(Trainer trainer) throws Exception {
+		String trainerOrStudent=trainer.getEmail().split("#")[1];
+		trainer.setEmail(trainer.getEmail().split("#")[0]);
+		int result;
+		if(!trainerOrStudent.equalsIgnoreCase("trainer") && !trainerOrStudent.equalsIgnoreCase("student")) throw new Exception("You are not authorised person to signup");
 		try{
-			pstmt=con.prepareStatement("insert into Trainer(ID,name,address,email,contactNumber,password) values(?,?,?,?,?,?)");
+			pstmt=con.prepareStatement("insert into "+trainerOrStudent+"(ID,name,address,email,contactNumber,password) values(?,?,?,?,?,?)");
 			pstmt.setString(1, trainer.getId());
 			pstmt.setString(2, trainer.getName());
 			pstmt.setString(3, trainer.getAddress());
 			pstmt.setString(4, trainer.getEmail());
 			pstmt.setLong(5, trainer.getContactNumber());
 			pstmt.setString(6, trainer.getPassword());
-			pstmt.executeUpdate();
-			return "shghuge";
+			result = pstmt.executeUpdate();
+			if(result>=1){
+				return trainer.getId();
+			}else {
+				return "got error";
+			}			
 		}
 		finally{
 			if(pstmt!=null)	pstmt.close();

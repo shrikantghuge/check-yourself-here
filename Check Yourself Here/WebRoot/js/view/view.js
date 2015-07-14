@@ -9,14 +9,10 @@
 	Exam.MainSectionView = Marionette.ItemView.extend({
 		template : '#main-section-template',
 		events :{
-			"click #trainerSignUpbutton" : "openTrainerSignupTemplate",
-			"click #studentSignUpbutton" : "openStudentSignupTemplate"
+			"click #signUpbutton" : "openSignupTemplate",			
 		},
-		openTrainerSignupTemplate : function(){
-			Exam.mainSectionRegions.show(new Exam.TrainerSignupView());
-			
-		},
-		openStudentSignupTemplate : function(){
+		openSignupTemplate : function(){
+			Exam.mainSectionRegions.show(new Exam.SignupView());
 			
 		}
 	});
@@ -63,19 +59,25 @@
 	});
 	
 	/*Trainer Signup View*/
-	Exam.TrainerSignupView = Marionette.ItemView.extend({
-		template : '#trainerSignUp-template',
+	Exam.SignupView = Marionette.ItemView.extend({
+		template : '#signUp-template',
 		events :{
-			"click #submitNewTrainer" : function() {
-				console.log("new trainer registration started : into  TrainerSignupView view");
-				var trainer = new Exam.Trainer({					
-					name : document.getElementById("trainerName").value,
-					contactNumber: document.getElementById("trainerContactNo").value,
-					email: document.getElementById("trainerEmail").value,
-					address: document.getElementById("trainerAddress").value,
-					trainerPassword: document.getElementById("trainerPassword").value
+			"click #submitNewsignUp" : function() {
+				console.log("new registration started : into  TrainerSignupView view");
+				var trainer = new Exam.Trainer({	
+					
+					name : document.getElementById("signUpName").value,
+					contactNumber: document.getElementById("signUpContactNo").value,
+					email: document.getElementById("signUpEmail").value+"#"+$("#trainerOrStudent").val(),
+					address: document.getElementById("signUpAddress").value,
+					trainerPassword: document.getElementById("signUpPassword").value
 				});
-				Exam.saveNewTrainer(trainer);
+				Exam.saveNewRegistration(trainer);
 			}
 		}
+	});
+	
+	/*Trainer successful signup template */
+	Exam.SuccessView = Marionette.ItemView.extend({
+		template : "#signUpSuccessTemplate"		
 	});

@@ -13,8 +13,8 @@
 	
 	Exam.Trainer = Backbone.Model.extend({
 	urlRoot : './exam/trainer/newRegistration',
-	initialize : function(){
-		console.log("Trainer model has been initialized");
-	}
+		initialize : function(){
+			console.log("Trainer model has been initialized");
+		}
 	});
 	

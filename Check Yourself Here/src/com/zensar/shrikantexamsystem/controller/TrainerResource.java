@@ -22,19 +22,27 @@ public class TrainerResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Trainer getTraineer(Trainer trainer){
+		String returnString="";
 		try {
-			examServices = new ExamServicesImpl();
-		} catch (ServicesNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-			try {
-				examServices.acceptTrainer(trainer);
-			} catch (ServicesNotFoundException | SQLException e) {
-				// TODO Auto-generated catch block
+			examServices = new ExamServicesImpl();		
+			returnString = examServices.acceptTrainer(trainer);
+			} catch ( ServicesNotFoundException | SQLException e) {
+				returnString = "got error";				
+				System.out.println("We have got the sql exception ");
 				e.printStackTrace();
-			}
-			return trainer;
+			} catch (Exception e) {
+				returnString = "got error";
+				e.printStackTrace();
+			}		
+		return new Trainer(returnString, "", "", "", null, 0, ""); 
+	}
+	
+	@POST
+	@Path("loginTrainer")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Trainer loginTrainer() {
+		return null;
 	}
 	
 }
