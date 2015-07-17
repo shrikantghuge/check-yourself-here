@@ -1,3 +1,6 @@
+<!-- author : shriaknt ghuge
+contact No :7709582219 -->
+
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -168,11 +171,14 @@
 		<div>
 			<input type="button" id="submitNewsignUp" value="Submit">
 		</div>
+		<div>
+			<label for="signUpError" id="signUpError" style="visibility: hidden; color: red;">Error In Storing, Please Try again!!</label>
+		</div>
 	</script>	
 	<script type="text/template" id="signUpSuccessTemplate">
 		<label> Your ID is : <@= id  @> </label> </br> 
 		<label> click <a href="#home">HERE</a> to login!!</label>
 	</script>
-	
+	<label for="signUpError" style="visibility: hidden; color: red;">Enter Address :</label>
 </body>
 </html>

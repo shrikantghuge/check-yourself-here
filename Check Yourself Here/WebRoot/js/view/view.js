@@ -70,7 +70,7 @@
 					contactNumber: document.getElementById("signUpContactNo").value,
 					email: document.getElementById("signUpEmail").value+"#"+$("#trainerOrStudent").val(),
 					address: document.getElementById("signUpAddress").value,
-					trainerPassword: document.getElementById("signUpPassword").value
+					password: document.getElementById("signUpPassword").value
 				});
 				Exam.saveNewRegistration(trainer);
 			}

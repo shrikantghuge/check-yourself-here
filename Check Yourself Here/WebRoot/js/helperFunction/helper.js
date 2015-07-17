@@ -45,9 +45,13 @@ Exam.saveNewRegistration = function(trainer){
 	            
 	        },		
 			success:function(model){
-				console.log("registrar has been saved successfully .."+model.toJSON().id);
-				Exam.mainSectionRegions.show(new Exam.SuccessView({model: model}));
-				
+				if(model.toJSON().id.trim()=="got error"){
+					Exam.mainSectionRegions.show(new Exam.SignupView());
+					$("#signUpError").css("visibility", "visible");
+				}else{
+					console.log("registrar has been saved successfully .."+model.toJSON().id);
+					Exam.mainSectionRegions.show(new Exam.SuccessView({model: model}));
+				}
 			}		
         }
     );
