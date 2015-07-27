@@ -239,7 +239,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 	}*/
 
 	@Override
-	public Trainer retrieveTrainee(String traineeId)throws SQLException {
+	public Trainer retrieveTrainer(String traineeId)throws SQLException {
 		Connection conn=con;
 		Statement stmt= conn.createStatement();
 		ResultSet rs=null;

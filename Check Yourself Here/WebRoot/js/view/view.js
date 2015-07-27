@@ -26,12 +26,12 @@
 			"click #submitStudentLogin" : "setCredentialsinModel"
 		},
 		setCredentialsinModel : function() {
-			console.log("now starting to load data into the model");
+			console.log("student login model creation in view file started");
 			var newStudent = new Exam.Student({
-				username : $("studentId").val(),
-				password : $("studentPassword").val()
+				username : $("#studentId").val(),
+				password : $("#studentPassword").val()
 			});
-			Exam.checkCredentials(newStudent);
+			Exam.loginRequestStudent(newStudent);
 		}
 	});
 	Exam.TrainerLoginView = Marionette.ItemView.extend({

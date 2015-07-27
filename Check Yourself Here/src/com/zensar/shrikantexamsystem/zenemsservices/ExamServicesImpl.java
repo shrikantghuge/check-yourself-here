@@ -182,24 +182,42 @@ public class ExamServicesImpl implements ExamServices{
 	}
 */
 	private String getTrainerId(Trainer trainerParam,int index) throws SQLException{
+		String trainerOrStudent=trainerParam.getEmail().split("#")[1];
 		Trainer trainer = new Trainer("", trainerParam.getName(), "", "", null, 0, "");
 		String resultString="";
-		do{
-			String nameWOSpaces=trainer.getName().replaceAll("\\s+", "");			
-			System.out.println("Name without spaces is :"+nameWOSpaces);
-			if(nameWOSpaces.length()<7){
-				RandomString randomString = new RandomString(7-nameWOSpaces.length());
-				resultString= nameWOSpaces +  randomString.nextString();
-			}else if(nameWOSpaces.substring(index,nameWOSpaces.length()).length()<7){
-				//getTrainerId(new Trainer("", nameWOSpaces.substring(index,nameWOSpaces.length()), "", "", null, 0, ""), index);
-				trainer.setName(nameWOSpaces.substring(index,nameWOSpaces.length()));
-			}else{
-				resultString = nameWOSpaces.substring(index,index+7);
-				index++;
-			}			
-			System.out.println("The result string is "+resultString +" And data retrived"+emsdaoServices.retrieveTrainee(resultString));
-			
-		}while(emsdaoServices.retrieveTrainee(resultString)!=null);
+		if(trainerOrStudent.equalsIgnoreCase("trainer")){
+			do{
+				String nameWOSpaces=trainer.getName().replaceAll("\\s+", "");			
+				System.out.println("Name without spaces is :"+nameWOSpaces);
+				if(nameWOSpaces.length()<7){
+					RandomString randomString = new RandomString(7-nameWOSpaces.length());
+					resultString= nameWOSpaces +  randomString.nextString();
+				}else if(nameWOSpaces.substring(index,nameWOSpaces.length()).length()<7){
+					//getTrainerId(new Trainer("", nameWOSpaces.substring(index,nameWOSpaces.length()), "", "", null, 0, ""), index);
+					trainer.setName(nameWOSpaces.substring(index,nameWOSpaces.length()));
+				}else{
+					resultString = nameWOSpaces.substring(index,index+7);
+					index++;
+				}			
+				System.out.println("The Trainer result string is "+resultString +" And data retrived"+emsdaoServices.retrieveTrainer(resultString));
+			}while(emsdaoServices.retrieveTrainer(resultString)!=null);
+		}else{
+			do{
+				String nameWOSpaces=trainer.getName().replaceAll("\\s+", "");			
+				System.out.println("Name without spaces is :"+nameWOSpaces);
+				if(nameWOSpaces.length()<7){
+					RandomString randomString = new RandomString(7-nameWOSpaces.length());
+					resultString= nameWOSpaces +  randomString.nextString();
+				}else if(nameWOSpaces.substring(index,nameWOSpaces.length()).length()<7){
+					//getTrainerId(new Trainer("", nameWOSpaces.substring(index,nameWOSpaces.length()), "", "", null, 0, ""), index);
+					trainer.setName(nameWOSpaces.substring(index,nameWOSpaces.length()));
+				}else{
+					resultString = nameWOSpaces.substring(index,index+7);
+					index++;
+				}			
+				System.out.println("The Trainer result string is "+resultString +" And data retrived"+emsdaoServices.retrieveTrainer(resultString));
+			}while(emsdaoServices.retrieveTrainer(resultString)!=null);
+		}
 		return resultString;
 	}
 }

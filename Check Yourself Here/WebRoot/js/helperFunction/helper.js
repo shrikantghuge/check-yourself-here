@@ -7,8 +7,8 @@ _.templateSettings = {
 };
 
 // Required helper function starting
-Exam.checkCredentials = function(model) {
-	console.log('you are going to save the data');
+Exam.loginRequestStudent = function(model) {
+	console.log('before student login request');
 	model.save({
 		error : function() {
 			console.log("there is error in storing");

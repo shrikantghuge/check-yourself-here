@@ -1,11 +1,7 @@
 //Models Section
 	Exam.Student = Backbone.Model.extend({
-		urlRoot : 'http://shghuge-ws01.partnet.cisco.com:8080/WebServicesRef/test/one/examDemo',
-		defaults : {
-			name : 'shrikant',
-			password : 'shri',
-			subject : 'marathi'
-		},
+		urlRoot : './exam/student/login',
+		defaults : {},
 		initialize : function() {
 			console.log("Student object is initialized!");
 		}
