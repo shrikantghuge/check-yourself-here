@@ -20,11 +20,12 @@ Exam.loginRequestStudent = function(model) {
 };
 
 Exam.checktrainerCredentials = function(trainer) {
-	trainer.fetch({
+	trainer.urlRoot = "./exam/trainer/login";
+	trainer.save({},{		
 		success:function(model){
-			console.log('politician fetched successfully');
+			console.log('trainer logined successfully');
 			//$("#mainSection").html("The admin logged in successfully!!");
-			if(model.toJSON().trainerName ==='Shriaknt' ){
+			if(model.toJSON().id ==='error' ){
 				Exam.mainSectionRegions.show(new Exam.InvalidUserView());
 				console.log("invalid user selected");
 			}

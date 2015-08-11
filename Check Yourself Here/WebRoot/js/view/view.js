@@ -41,7 +41,7 @@
 				console.log("setting credentials in model are.."+  document.getElementById("trainerId").value+" and "+document.getElementById("trainerPassword").value);
 				var trainer = new Exam.Trainer({
 					id: document.getElementById("trainerId").value,
-					trainerPassword : document.getElementById("trainerPassword").value					
+					password : document.getElementById("trainerPassword").value					
 				});
 				Exam.checktrainerCredentials(trainer);
 			}			
