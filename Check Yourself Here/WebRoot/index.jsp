@@ -179,6 +179,10 @@ contact No :7709582219 -->
 		<label> Your ID is : <@= id  @> </label> </br> 
 		<label> click <a href="#home">HERE</a> to login!!</label>
 	</script>
+	<script type="text/template" id="sessionExpireTemplate">
+		<label>Session has been expired!! Please try again latter.</label>
+		<label> click <a href="#home">HERE</a> to play safe :)!!</label>
+	</script>	
 	<label for="signUpError" style="visibility: hidden; color: red;">Enter Address :</label>
 </body>
 </html>

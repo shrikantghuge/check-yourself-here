@@ -2,6 +2,7 @@ package com.zensar.shrikantexamsystem.zenemsdaoservices;
 import java.sql.SQLException;
 
 import com.zensar.shrikantexamsystem.beans.Trainer;
+import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
 
 public interface ExamDAOServices {
 	public String insertTrainer(Trainer trainer) throws SQLException, Exception;
@@ -25,4 +26,5 @@ public interface ExamDAOServices {
 	public boolean deleteStudents(int examId) throws SQLException;
 	public Trainer retrieveTrainer(Trainer trainer) throws SQLException;
 	public boolean insertStudentDetails(String filePath) throws SQLException, IOException;	
-*/}
+*/
+	public boolean setToken(Trainer trainerResult, int randomNum) throws ServicesNotFoundException;}

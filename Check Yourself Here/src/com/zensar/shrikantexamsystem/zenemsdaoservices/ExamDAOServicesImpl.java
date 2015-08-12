@@ -253,6 +253,20 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 			if(stmt!=null) stmt.close();
 		}
 	}
+	@Override
+	public boolean setToken(Trainer trainerResult, int randomNum) throws ServicesNotFoundException {		
+		try {
+			Statement stmt = con.createStatement();
+			 if(stmt.executeUpdate("insert into trainer(token) values('"+randomNum+"')")>0){
+				 return true;
+			 }else{
+				 return false;
+			 }
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			throw new ServicesNotFoundException("Service Not found");
+		}		
+	}
 
 	/*@Override
 	public boolean updateExam(Exam exam) throws SQLException {

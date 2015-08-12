@@ -81,3 +81,8 @@
 	Exam.SuccessView = Marionette.ItemView.extend({
 		template : "#signUpSuccessTemplate"		
 	});
+	
+	/*Session Expire, Page Reload , Back Button Session Expire*/
+Exam.InvalidSessionView = Marrionette.ItemView.extend({
+	template : "#sessionExpireTemplate"	
+});

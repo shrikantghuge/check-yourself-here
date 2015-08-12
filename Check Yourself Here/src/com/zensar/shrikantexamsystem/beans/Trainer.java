@@ -1,5 +1,4 @@
 package com.zensar.shrikantexamsystem.beans;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -21,7 +20,7 @@ public class Trainer {
 		System.out.println("Trainer is initialized");
 	}
 	public Trainer(String id, String name, String address, String email,
-			List<Subject> subjects, long contactNumber, String trainerPassword) {
+			List<Subject> subjects, long contactNumber, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -29,7 +28,7 @@ public class Trainer {
 		this.email = email;
 		this.subjects = subjects;
 		this.contactNumber = contactNumber;
-		this.password = trainerPassword;
+		this.password = password;
 	}
 
 
@@ -84,7 +83,7 @@ public class Trainer {
 	public String toString() {
 		return "Trainer [id=" + id + ", name=" + name + ", address=" + address
 				+ ", email=" + email + ", subjects=" + subjects
-				+ ", contactNumber=" + contactNumber + ", trainerPassword="
+				+ ", contactNumber=" + contactNumber + ", password="
 				+ password + "]";
 	}
 }

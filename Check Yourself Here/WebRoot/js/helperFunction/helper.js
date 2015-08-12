@@ -25,8 +25,11 @@ Exam.checktrainerCredentials = function(trainer) {
 		success:function(model){
 			console.log('trainer logined successfully');
 			//$("#mainSection").html("The admin logged in successfully!!");
-			if(model.toJSON().id ==='error' ){
+			if(model.toJSON().id ==='dataNotFound' ){
 				Exam.mainSectionRegions.show(new Exam.InvalidUserView());
+				console.log("invalid user selected");
+			}else if(model.toJSON().id ==='sessionError' ){
+				Exam.mainSectionRegions.show(new Exam.InvalidSessionView());
 				console.log("invalid user selected");
 			}
 			else{

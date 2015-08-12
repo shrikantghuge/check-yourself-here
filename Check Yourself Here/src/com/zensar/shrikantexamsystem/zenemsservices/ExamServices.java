@@ -3,6 +3,7 @@ import java.sql.SQLException;
 
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
+import com.zensar.shrikantexamsystem.exceptions.TrainerNotFoundException;
 
 public interface ExamServices {
 	public String acceptTrainer(Trainer trainer) throws ServicesNotFoundException, SQLException, Exception;
@@ -25,4 +26,7 @@ public interface ExamServices {
 	public boolean getTrainerLoginDetails(Trainer trainer) throws TrainerNotFoundException,InvalidPasswordException,ServicesNotFoundException;
 	public boolean getTraineeLoginDetails(int examId,Trainee trainee) throws TraineeNotFoundException,InvalidPasswordException ,ServicesNotFoundException;
 	public boolean giveExam(Trainee trainee,Exam exam,Section section,List<Question> userPaper) throws ExamNotFoundException,ServicesNotFoundException,SectionNotFoundException,QuestionsNotFoundException;
-*/}
+*/
+
+	Trainer getTrainerLoginDetails(Trainer trainer)throws TrainerNotFoundException, ServicesNotFoundException;
+	}

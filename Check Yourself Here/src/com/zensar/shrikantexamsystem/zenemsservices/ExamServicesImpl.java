@@ -7,6 +7,7 @@ import java.util.Random;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
+import com.zensar.shrikantexamsystem.exceptions.TrainerNotFoundException;
 import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServices;
 import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServicesImpl;
 
@@ -144,19 +145,31 @@ public class ExamServicesImpl implements ExamServices{
 	public Trainee getTraineeDetails(int traineeId, int traineePassword)throws TraineeNotFoundException, ServicesNotFoundException {
 		// TODO Auto-generated method stub
 		return null;
-	}
+	}*/
 	@Override
-	public boolean getTrainerLoginDetails(Trainer trainer)throws TrainerNotFoundException, InvalidPasswordException,ServicesNotFoundException {
+	public Trainer getTrainerLoginDetails(Trainer trainer)throws TrainerNotFoundException, ServicesNotFoundException {
 		try {
-			Trainer trainer2 = emsdaoServices.retrieveTrainer(trainer);
-			if(trainer2==null) throw new TrainerNotFoundException("There is no trainer associate with Id :"+trainer.getTrainerId());
-			if(trainer2.getTrainerPassword()==trainer.getTrainerPassword().trim()) return true;
-			else return false;
+			Trainer trainerResult= emsdaoServices.retrieveTrainer(trainer.getId());		
+			if(trainerResult==null) throw new TrainerNotFoundException("There is no trainer associate with Id :"+trainer.getId());
+			if(trainerResult.getPassword()==trainer.getPassword().trim()){
+				int randomNum;
+				Random rn = new Random();
+				int n = 999999999 - 1111111111 + 1;
+				int i = rn.nextInt() % n;
+				randomNum =  1111111111 + i;
+				if(emsdaoServices.setToken(trainerResult ,randomNum)){
+					trainerResult.setPassword(randomNum+"");
+				}else{
+					return new Trainer("error","", "", "", null, 0, "");
+				}
+				return trainerResult;			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ServicesNotFoundException("Service Not Found", e);
 		}
-	}
+		return new Trainer("error","", "", "", null, 0, "");
+	}/*
 	@Override
 	public boolean getTraineeLoginDetails(int examId,Trainee trainee)throws TraineeNotFoundException, InvalidPasswordException,ServicesNotFoundException {
 		try {
