@@ -1,0 +1,379 @@
+<!-- author : shriaknt ghuge
+contact No :7709582219 -->
+
+<!DOCTYPE HTML>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>Zensar Exam System</title>
+		<link rel="stylesheet" href="css/main.css">
+		
+		<!--  JavaScript -->
+		<script src="js/jquery-1.9.1.js">	
+		</script>
+		<script src="js/underscore-1.7.js">	
+		</script>
+		<script src="js/backbone-1.1.2.js">	
+		</script>
+		<script src="js/backbone.marionette-1.8.js">	
+		</script>
+		<script>
+			Exam = new Marionette.Application();
+			//Add Region Section
+			Exam.addRegions({
+				topHeaderRegions : '#topHeader',
+				topMenuRegions : '#topMenu',
+				mainSectionRegions : '#mainSection',
+				theFooterRegions : '#theFooter'
+			});	
+		</script>
+		<script src="js/model/model.js"></script>
+		<script src="js/router/router.js"></script>
+		<script src="js/view/view.js"></script>
+		<script src="js/helperFunction/helper.js"></script>
+		<script>
+			//Required for application to start 
+			Exam.on('initialize:after', function() {
+				new Exam.MainRouter({
+					controller : new Exam.PortalController()
+				});
+			});
+			Exam.on('start', function() {
+				console.info("exam is started");
+				Backbone.history.start();
+			});
+			$(function() {
+				Exam.start();
+			});
+		</script>
+	</head>
+	<body>
+		<header id="topHeader"> </header>
+		<nav id="topMenu"></nav>
+		<article>
+			<section id="mainSection"></section>
+		</article>
+		<footer id="theFooter"> </footer>
+	
+	
+		<!--  Templates Starts from here -->
+		<script type="text/template" id="top-header-template">
+		<h1>ZENEMS System</h1>
+	</script>
+		<script type="text/template" id="top-menu-template">
+		<ul>
+			<li><a href="#home">Home</a></li>
+			<li><a href="#student">Student Login</a></li>
+			<li><a href="#trainer">Trainer Login</a></li>
+		</ul>
+	</script>
+		<script type="text/template" id="main-section-template">
+		<div>
+			<input type="button" value="Sign UP" id="signUpbutton"/> 
+		</div>
+		<div id="trainerSigninLink">
+			<label>Click <a href="#trainer">here</a>  to login </label>
+		</div>
+		<div id="traineeSigninLink">
+			<label>Click <a href="#student"> here </a> to login </label>
+		</div>
+	</script>
+		<script type="text/template" id="the-footer-template">
+			 Copyright Zensar Technologies. 
+	</script>
+		<script type="text/template" id="studentLogin-template">
+		<form>
+		<label for="studentId">User Id :</label>
+		<input type="text" placeholder="Enter Id" id="studentId">
+		<label for="studentPassword">Enter Password :</label>
+		<input type="password" id="studentPassword"> 
+		<input type="button" value="Submit" id="submitStudentLogin">
+		</form>
+	</script>
+		<script type="text/template" id="trainerlogin-template">
+		<form>
+		<label for="trainerId">Trainer User Id :</label>
+		<input type="text" placeholder="Enter Id" id="trainerId"></br>
+		<label for="trainerPassword">Enter Password :</label> 
+		<input type="password" id="trainerPassword"> </br>
+		<input type="button" value="Submit" id="submitTrainerLogin"> <input type="button" value="Sigh Up" id="signUpTrainer">
+		</form>
+	</script>
+		<script type="text/template" id="trainerLoggedInMaintopmenu-template">
+			<li><a href="#addDetails">Add Details</a></li>
+			<li><a href="#viewDetails">View Details</a></li>
+			<li><a href="#modifyDetails">Modify Details</a></li>
+			<li><a href="#trainerLogOut"> Logout </a> <li> 
+	</script>
+		<script type="text/templet" id="trainerLoggedInMain-Template">
+		<div id="exam">
+		<label for="exam"> Add Exam  : </label><br>
+		<label for="examName">Exam Name:</label>
+		<input type="text" placeholder="Exam Name" id="examName">
+		<button type="button" id="examSubmit"> Submit</button>
+		<div id="selectExamDiv" style="visibility: hidden;">
+		<label for="selectExamLabel">Select Exam</label><br>
+		<select id="examList">
+			<option value="select"> Select</option>
+		</select>
+		</div>
+		</div>
+		<div id="section" style="border-top:2px ; border-top-color: black; visibility: hidden;">
+		<label for="section">Add Section to Exam :</label><br>
+		<label for="sectionName"> Section Name</label>
+		<input type="text" placeholder="Section Name"><br><br><br>
+		<label for="sectionCompelsion">The following Details are compelsory: </label><br>
+		<label for="questionSet"> Select Question's File</label>
+		<input type="file" id="questionSet"><br>
+		<label for="timeTable">Enter Timetable Details</label><br>
+		<label for="selectDate">Enter Start Time</label><input type="date" placeholder="Enter Exam Date" id="examDate">
+		<label for="startTime">Enter Start Time for Exam</label><input type="time" placeholder="Exam Start Time" id="examStartTime">
+		<label for="endTime">Enter End Time for Exam</label><input type="time" placeholder="Exam End Time" id="examEndTime"><br>
+		<label for="appearingStudent"> Select Student's File</label>
+		<input type="file" id="appearingStudent"><br>
+		<input type="button" id="sectionSubmit" value="Submit Details">
+		</div>
+	</script>
+		<script type="text/template" id="invalidUser-template">
+		Your Username or Password is not correct
+	</script>
+		<script type="text/template" id="signUp-template">
+		<div>
+			<label>You are a </label>
+			<select id="trainerOrStudent">
+				<option id="0" selected="selected">Select One..</option>
+				<option id="trainer">Trainer</option>
+				<option id="student">Student</option>
+			</select>
+		<div>
+		<div>
+			<label for="signUpName">Enter Name :</label>
+			<input type="text" id = "signUpName">
+		</div>
+		<div>
+			<label for="signUpContactNo">Enter Mobile Number :</label>
+			<input type="number" id="signUpContactNo">
+		</div>
+		<div>
+			<label for="signUpEmail">Enter Email Address :</label>
+			<input type="text" id="signUpEmail">		
+		</div>	
+		<div>
+			<label for="signUpAddress">Enter Address :</label>
+			<input type="text" id="signUpAddress">
+		</div>
+		<div>
+			<label for="signUpPassword">Enter Password :</label>
+			<input type="password" id="signUpPassword">
+		</div>
+		<div>
+			<label for="signUpPasswordConfirm">Re-enter Password :</label>
+			<input type="password" id="signUpPasswordConfirm">
+		</div> 
+		<div>
+			<input type="button" id="submitNewsignUp" value="Submit">
+		</div>
+		<div>
+			<label for="signUpError" id="signUpError" style="visibility: hidden; color: red;">Error In Storing, Please Try again!!</label>
+		</div>
+	</script>	
+		<script type="text/template" id="signUpSuccessTemplate">
+		<label> Your ID is : <@= id  @> </label> </br> 
+		<label> click <a href="#home">HERE</a> to login!!</label>
+	</script>
+		<script type="text/template" id="sessionExpireTemplate">
+		<label>Session has been expired!! Please try again latter.</label>
+		<label> click <a href="#home">HERE</a> to play safe :)!!</label>
+	</script>	
+		<script type="text/template" id="trainerHeadBanner">
+		<div>
+			<ul>
+				<li><a href="#trainerHome">Trainer Home</a></li>
+				<li><a href="#trainerProfile">Edit Profile</a></li>
+				<li><a href="#trainerStudentDetails">Students Details</a></li>
+				<li><a href="#trainerExam">Training Details</a></li>
+				<li><a href="#logout">Logout</a></li>
+			</ul>		
+		</div>
+	</script>
+		<script type="text/template" id="trainerHome">
+		<div>
+			<table>
+				<tr>
+					<td><label>Trainer Id</label></td>
+					<td><label><@= id ></label></td>
+				</tr>
+				<tr>
+					<td><label>Trainer Name</label></td>
+					<td><label><@= name ></label></td>
+				</tr>
+				<tr>
+					<td><label>Mobile Number</label></td>
+					<td><label><@= contactNumber ></label></td>
+				</tr>
+				<tr>
+					<td><label>Email Id </label></td>
+					<td><label><@= email ></label></td>
+				</tr>
+				<tr>
+					<td><label>Address </label></td>
+					<td><label><@= address ></label></td>
+				</tr>
+				<tr>
+					<td><label>Subjects </label></td>
+					<td><label><@= subjects ></label></td>
+				</tr>
+			</table>	
+		</div>
+	</script>
+	<script type="text/template" id="trainerEdit">
+		<div>
+			<div>
+				<table>
+					<tr>
+						<td><label>Trainer Id</label></td>
+						<td><input type="text" value='<@= id >' id="tEditId" disabled="disabled"/></td>					
+					</tr>
+					<tr>
+						<td><label>Trainer Name</label></td>
+						<td><input type="text" value='<@= name >' id="tEditName"/></td>					
+					</tr>
+					<tr>
+						<td><label>Mobile Number</label></td>
+						<td><input type="text" value='<@= contactNumber >' id="tEditContactNumber"/></td>					
+					</tr>
+					<tr>
+						<td><label>Email Id </label></td>
+						<td><input type="text" value='<@= email >' id="tEditEmailId"/></td>					
+					</tr>
+					<tr>
+						<td><label>Address </label></td>
+						<td><input type="text" value='<@= address >' id="tEditAddress"/></td>					
+					</tr>
+				</table>	
+			</div>
+		</div>	
+	</script>
+	<script type="text/template" id="trainerStudentDetails">
+		<div>
+			<label>Student Details : </label>
+			<ul>
+			<li><select id="tSDetailsSubject"><option selected="selected" id="0" value="Select One.."></option></select></li>
+			<li><select id="tSDetailsExam" disabled="disabled"><option selected="selected" id="0" value="Select One.."></option></select></li>
+			<li><select id="tSDetailsStudent"><option selected="selected" id="0" value="Select One.."></option></select></li>
+			</ul>		
+		</div>
+	</script>
+	<script type="text/template" id="trainerTrainingSection">
+		<div>
+			<label>Trainer Training Details</label>		
+		</div>	
+		<div id="trainerTrainingSection">
+			<div id="trainerTSectionMenu">
+				<ul>
+					<li>Add/ Remove Subject </li>
+				</ul>
+				<ul>
+					<li>Add/ Remove Student</li>
+				</ul>
+				<ul>
+					<li>Schedule Exam</li>
+				</ul>
+				<ul>
+					<li>View Exam details</li>
+				</ul>			
+			</div>
+			<div id="trainerTSectionBody">
+			</div>		
+		</div>
+	</script>
+	<script type="text/template" id="trainerAddRemoveSubject">
+		<div>	
+			<label>Add Subject</label>
+			<div>
+				<div>
+					<label>Subject Name</label> <input type="text" id="trainerTrainingAddSubjectSubjectName">
+				</div>
+				<div>
+					<label>Subject Description </label><input type="text" id="trainerTrainingAddSubjectSubjectDescription">
+				</div>
+				<div>
+					<label>Add Students *</label>
+					<div>
+						<label>Browse</label> <input type="file" id="trainerTrainingAddSubjectStudentListFile">
+					</div>
+					<label>OR</label>
+					<div>	
+						<label>Enter Student Id's(Comma seperated) : </label> <input type="text" id="trainerTrainingAddSubjectStudentListText">
+					</div>
+				</div>
+				<input type="button" id="trainerTrainingAddSubjectButton">			
+			</div>
+			<label>Remove Subject's</label>
+			<div>
+				<select id="trainerTrainingRemoveSubjectSelection"></select>
+				<input type="button" id="trainerTrainingRemoveSubjectButton">
+			</div>		
+		</div>
+	</script>
+	<script type="text/template" id="trainerAddRemoveSubject">
+		<div>
+			<label>Add Student :</label>
+			<div>
+				<div>
+					<label>Select subject</label> <select id="trainerTrainingAddRemoveStudentSubjectDD"></select>
+				</div>
+				<div>
+					<label>Add Student</label>
+					<div>
+						<label>Browse</label> <input type="file" id="trainerTrainingAddStudentListFile">
+					</div>
+					<label>OR</label>
+					<div>
+						<label>Enter Student Id's(Comma seperated) : </label> <input type="text" id="trainerTrainingAddStudentListText">
+					</div>
+				</div>
+			</div>
+			<div>
+				<label>Remove Student</label>
+					<div>
+						<label>Select Subject :</label> <select id="trainerTrainingRemoveStudentSubjectList"></select>
+					</div>
+					<div>
+						<label>Select Student :</label> <select id="trainerTrainingRemoveStudentStudentList"></select>
+					</div>			
+					<input type="button">
+			</div>
+		</div>
+	</script>
+	<div>
+		<label>Schedule an Examination :</label>
+		<div>
+			<label>Select Subject : </label> <select id="trainerTrainingScheduleExamSubjects"></select>
+			<label></label>
+			
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<div>
+		<label>Please select following fields properly to get result:</label>		
+	</div>
+		<label for="signUpError" style="visibility: hidden; color: red;">Enter Address :</label>
+	</body>
+</html>
