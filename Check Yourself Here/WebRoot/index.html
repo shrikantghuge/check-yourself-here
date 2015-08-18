@@ -6,6 +6,7 @@ contact No :7709582219 -->
 	<head>
 		<meta charset="utf-8" />
 		<title>Zensar Exam System</title>
+		<link rel="import" href="/templates/trainerTemplates/AllPages.html">
 		<link rel="stylesheet" href="css/main.css">
 		
 		<!--  JavaScript -->
@@ -99,7 +100,7 @@ contact No :7709582219 -->
 		<input type="button" value="Submit" id="submitTrainerLogin"> <input type="button" value="Sigh Up" id="signUpTrainer">
 		</form>
 	</script>
-		<script type="text/template" id="trainerLoggedInMaintopmenu-template">
+	<script type="text/template" id="trainerLoggedInMaintopmenu-template">
 			<li><a href="#addDetails">Add Details</a></li>
 			<li><a href="#viewDetails">View Details</a></li>
 			<li><a href="#modifyDetails">Modify Details</a></li>
@@ -277,7 +278,7 @@ contact No :7709582219 -->
 					<li>Add/ Remove Student</li>
 				</ul>
 				<ul>
-					<li>Schedule Exam</li>
+					<li>Schedule/Re-Schedule Exam</li>
 				</ul>
 				<ul>
 					<li>View Exam details</li>
@@ -316,7 +317,7 @@ contact No :7709582219 -->
 			</div>		
 		</div>
 	</script>
-	<script type="text/template" id="trainerAddRemoveSubject">
+	<script type="text/template" id="trainerAddRemoveStudent">
 		<div>
 			<label>Add Student :</label>
 			<div>
@@ -346,34 +347,37 @@ contact No :7709582219 -->
 			</div>
 		</div>
 	</script>
-	<div>
-		<label>Schedule an Examination :</label>
+	<script type="text/template" id="trainerScheduleReScheduleExam">
 		<div>
-			<label>Select Subject : </label> <select id="trainerTrainingScheduleExamSubjects"></select>
-			<label></label>
-			
+			<label>Schedule an Examination :</label>
+			<div>
+				<label>Select Subject : </label> <select id="trainerTrainingScheduleExamSubjects"></select>
+				<label>Enter Examinatio name :</label> <input type="text" id="trainerTrainingScheduleExamName">
+				<label>Start Date :</label> <input type="text" id="trainerTrainingScheduleExamDate">
+				<label title="Alloted time to solve an exam">Exam Hours :</label><input type="number" id="trainerTrainingScheduleExamHours">
+				<label title="Time slot in which student can appear for exam">Total Time allotaed :</label> <input type="number" id="trainerTrainingScheduleExamTotalTime">
+				<input type="button">			
+			</div>
+			<label>Re-Schedule Examination</label>
+			<div>
+				<label>Select Subject: </label> <select id="trainerTrainingReScheduleExamSubjects"></select>		
+				<label>Select Examination</label><select id="trainerTrainingReScheduleExamName"></select>
+				<div id="trainerTrainingReScheduleExamEdit"></div>
+			</div>
 		</div>
-	</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	<div>
+	</script>
+	<script type="text/template" id="trainerTrainingReScheduleExamTemplate">
+		<label>Subject Name :</label> <input type="text" disabled="disabled" value='<@= subjectName >' id="trainerTrainingReScheduleSubjectName">
+		<label>Exam Id: </label><input type="text" disabled="disabled" value='<@= examId >' id="trainerTrainingReScheduleExamId">
+		<label>Exam Name :</label><input type="text" disabled="disabled" value='<@= examName >' id="trainerTrainingReScheduleExamName">
+		<label>Start Date :</label> <input type="text" value='<@= examStartDate >' id="trainerTrainingReScheduleDate">
+		<label title="Alloted time to solve an exam">Exam Hours :</label><input type="number" value='<@= examHours >' id="trainerTrainingReScheduleExamHours">
+		<label title="Time slot in which student can appear for exam">Total Time allotaed :</label> <input type="number" value='<@= examTotalTime >' id="trainerTrainingReScheduleExamTotalTime">
+		<input type="button">	
+	</script>
+	<!-- <div>
 		<label>Please select following fields properly to get result:</label>		
-	</div>
+	</div> -->
 		<label for="signUpError" style="visibility: hidden; color: red;">Enter Address :</label>
 	</body>
 </html>

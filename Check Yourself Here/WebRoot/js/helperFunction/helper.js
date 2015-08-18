@@ -22,8 +22,7 @@ Exam.loginRequestStudent = function(model) {
 Exam.checktrainerCredentials = function(trainer) {
 	trainer.urlRoot = "./exam/trainer/login";
 	trainer.save({},{		
-		success:function(model){
-			console.log('trainer logined successfully');
+		success:function(model){			
 			//$("#mainSection").html("The admin logged in successfully!!");
 			if(model.toJSON().id ==='dataNotFound' ){
 				Exam.mainSectionRegions.show(new Exam.InvalidUserView());
@@ -33,8 +32,8 @@ Exam.checktrainerCredentials = function(trainer) {
 				console.log("invalid user selected");
 			}
 			else{
-				Exam.mainSectionRegions.show(new Exam.TrainerHomeView());
-				console.log("json id"+model.toJSON().id);
+				console.log("trainer logined successfully json id"+model.toJSON());
+				Exam.mainSectionRegions.show(new Exam.TrainerHomeView());				
 			}
 		}
 	});

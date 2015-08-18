@@ -8,3 +8,4 @@ public class Subject {
 	private String description;	
 	private List<Exam> exams;
 }
+
