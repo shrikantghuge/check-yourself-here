@@ -61,13 +61,14 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		int result;
 		if(!trainerOrStudent.equalsIgnoreCase("trainer") && !trainerOrStudent.equalsIgnoreCase("student")) throw new Exception("You are not authorised person to signup");
 		try{
-			pstmt=con.prepareStatement("insert into "+trainerOrStudent+"(ID,name,address,email,contactNumber,password) values(?,?,?,?,?,?)");
+			pstmt=con.prepareStatement("insert into person(ID,name,address,email,contactNumber,password,designation) values(?,?,?,?,?,?,?)");
 			pstmt.setString(1, trainer.getId());
 			pstmt.setString(2, trainer.getName());
 			pstmt.setString(3, trainer.getAddress());
 			pstmt.setString(4, trainer.getEmail());
 			pstmt.setLong(5, trainer.getContactNumber());
 			pstmt.setString(6, trainer.getPassword());
+			pstmt.setString(7, trainerOrStudent);
 			result = pstmt.executeUpdate();
 			if(result>=1){
 				return trainer.getId();
@@ -244,7 +245,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		Statement stmt= conn.createStatement();
 		ResultSet rs=null;
 		try {			
-			rs = stmt.executeQuery("select * from trainer where Id='"+traineeId+"'");
+			rs = stmt.executeQuery("select * from person where Id='"+traineeId+"'");
 			if(rs.next()) return new Trainer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), null, rs.getLong(5), rs.getString(6));
 			else return null;
 		} finally{

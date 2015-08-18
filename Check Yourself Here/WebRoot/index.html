@@ -58,10 +58,10 @@ contact No :7709582219 -->
 	
 	
 		<!--  Templates Starts from here -->
-		<script type="text/template" id="top-header-template">
+	<script type="text/template" id="top-header-template">
 		<h1>ZENEMS System</h1>
 	</script>
-		<script type="text/template" id="top-menu-template">
+	<script type="text/template" id="top-menu-template">
 		<ul>
 			<li><a href="#home">Home</a></li>
 			<li><a href="#student">Student Login</a></li>
@@ -73,10 +73,10 @@ contact No :7709582219 -->
 			<input type="button" value="Sign UP" id="signUpbutton"/> 
 		</div>
 		<div id="trainerSigninLink">
-			<label>Click <a href="#trainer">here</a>  to login </label>
+			<label>Trainer Click <a href="#trainer">here</a>  to login </label>
 		</div>
 		<div id="traineeSigninLink">
-			<label>Click <a href="#student"> here </a> to login </label>
+			<label>Trainer Click <a href="#student"> here </a> to login </label>
 		</div>
 	</script>
 		<script type="text/template" id="the-footer-template">
@@ -91,7 +91,7 @@ contact No :7709582219 -->
 		<input type="button" value="Submit" id="submitStudentLogin">
 		</form>
 	</script>
-		<script type="text/template" id="trainerlogin-template">
+	<script type="text/template" id="trainerlogin-template">
 		<form>
 		<label for="trainerId">Trainer User Id :</label>
 		<input type="text" placeholder="Enter Id" id="trainerId"></br>
@@ -105,40 +105,11 @@ contact No :7709582219 -->
 			<li><a href="#viewDetails">View Details</a></li>
 			<li><a href="#modifyDetails">Modify Details</a></li>
 			<li><a href="#trainerLogOut"> Logout </a> <li> 
-	</script>
-		<script type="text/templet" id="trainerLoggedInMain-Template">
-		<div id="exam">
-		<label for="exam"> Add Exam  : </label><br>
-		<label for="examName">Exam Name:</label>
-		<input type="text" placeholder="Exam Name" id="examName">
-		<button type="button" id="examSubmit"> Submit</button>
-		<div id="selectExamDiv" style="visibility: hidden;">
-		<label for="selectExamLabel">Select Exam</label><br>
-		<select id="examList">
-			<option value="select"> Select</option>
-		</select>
-		</div>
-		</div>
-		<div id="section" style="border-top:2px ; border-top-color: black; visibility: hidden;">
-		<label for="section">Add Section to Exam :</label><br>
-		<label for="sectionName"> Section Name</label>
-		<input type="text" placeholder="Section Name"><br><br><br>
-		<label for="sectionCompelsion">The following Details are compelsory: </label><br>
-		<label for="questionSet"> Select Question's File</label>
-		<input type="file" id="questionSet"><br>
-		<label for="timeTable">Enter Timetable Details</label><br>
-		<label for="selectDate">Enter Start Time</label><input type="date" placeholder="Enter Exam Date" id="examDate">
-		<label for="startTime">Enter Start Time for Exam</label><input type="time" placeholder="Exam Start Time" id="examStartTime">
-		<label for="endTime">Enter End Time for Exam</label><input type="time" placeholder="Exam End Time" id="examEndTime"><br>
-		<label for="appearingStudent"> Select Student's File</label>
-		<input type="file" id="appearingStudent"><br>
-		<input type="button" id="sectionSubmit" value="Submit Details">
-		</div>
-	</script>
-		<script type="text/template" id="invalidUser-template">
+	</script>	
+	<script type="text/template" id="invalidUser-template">
 		Your Username or Password is not correct
 	</script>
-		<script type="text/template" id="signUp-template">
+	<script type="text/template" id="signUp-template">
 		<div>
 			<label>You are a </label>
 			<select id="trainerOrStudent">
@@ -186,76 +157,76 @@ contact No :7709582219 -->
 		<label>Session has been expired!! Please try again latter.</label>
 		<label> click <a href="#home">HERE</a> to play safe :)!!</label>
 	</script>	
-		<script type="text/template" id="trainerHeadBanner">
+	<script type="text/template" id="trainerHeadBannerTemplate">
 		<div>
 			<ul>
 				<li><a href="#trainerHome">Trainer Home</a></li>
 				<li><a href="#trainerProfile">Edit Profile</a></li>
 				<li><a href="#trainerStudentDetails">Students Details</a></li>
-				<li><a href="#trainerExam">Training Details</a></li>
+				<li><a href="#trainerTraining">Training Details</a></li>
 				<li><a href="#logout">Logout</a></li>
 			</ul>		
 		</div>
 	</script>
-		<script type="text/template" id="trainerHome">
+	<script type="text/template" id="trainerHomeTemplate">
 		<div>
 			<table>
 				<tr>
 					<td><label>Trainer Id</label></td>
-					<td><label><@= id ></label></td>
+					<td><label><@= id @></label></td>
 				</tr>
 				<tr>
 					<td><label>Trainer Name</label></td>
-					<td><label><@= name ></label></td>
+					<td><label><@= name @></label></td>
 				</tr>
 				<tr>
 					<td><label>Mobile Number</label></td>
-					<td><label><@= contactNumber ></label></td>
+					<td><label><@= contactNumber @></label></td>
 				</tr>
 				<tr>
 					<td><label>Email Id </label></td>
-					<td><label><@= email ></label></td>
+					<td><label><@= email @></label></td>
 				</tr>
 				<tr>
 					<td><label>Address </label></td>
-					<td><label><@= address ></label></td>
+					<td><label><@= address @></label></td>
 				</tr>
 				<tr>
 					<td><label>Subjects </label></td>
-					<td><label><@= subjects ></label></td>
+					<td><label><@= subjects @></label></td>
 				</tr>
 			</table>	
 		</div>
 	</script>
-	<script type="text/template" id="trainerEdit">
+	<script type="text/template" id="trainerEditTemplate">
 		<div>
 			<div>
 				<table>
 					<tr>
 						<td><label>Trainer Id</label></td>
-						<td><input type="text" value='<@= id >' id="tEditId" disabled="disabled"/></td>					
+						<td><input type="text" value='<@= id @>' id="tEditId" disabled="disabled"/></td>					
 					</tr>
 					<tr>
 						<td><label>Trainer Name</label></td>
-						<td><input type="text" value='<@= name >' id="tEditName"/></td>					
+						<td><input type="text" value='<@= name @>' id="tEditName"/></td>					
 					</tr>
 					<tr>
 						<td><label>Mobile Number</label></td>
-						<td><input type="text" value='<@= contactNumber >' id="tEditContactNumber"/></td>					
+						<td><input type="text" value='<@= contactNumber @>' id="tEditContactNumber"/></td>					
 					</tr>
 					<tr>
 						<td><label>Email Id </label></td>
-						<td><input type="text" value='<@= email >' id="tEditEmailId"/></td>					
+						<td><input type="text" value='<@= email @>' id="tEditEmailId"/></td>					
 					</tr>
 					<tr>
 						<td><label>Address </label></td>
-						<td><input type="text" value='<@= address >' id="tEditAddress"/></td>					
+						<td><input type="text" value='<@= address @>' id="tEditAddress"/></td>					
 					</tr>
 				</table>	
 			</div>
 		</div>	
 	</script>
-	<script type="text/template" id="trainerStudentDetails">
+	<script type="text/template" id="trainerStudentDetailsTemplate">
 		<div>
 			<label>Student Details : </label>
 			<ul>
@@ -265,7 +236,7 @@ contact No :7709582219 -->
 			</ul>		
 		</div>
 	</script>
-	<script type="text/template" id="trainerTrainingSection">
+	<script type="text/template" id="trainerTrainingSectionTemplate">
 		<div>
 			<label>Trainer Training Details</label>		
 		</div>	
@@ -288,7 +259,7 @@ contact No :7709582219 -->
 			</div>		
 		</div>
 	</script>
-	<script type="text/template" id="trainerAddRemoveSubject">
+	<script type="text/template" id="trainerAddRemoveSubjectTemplate">
 		<div>	
 			<label>Add Subject</label>
 			<div>
@@ -317,7 +288,7 @@ contact No :7709582219 -->
 			</div>		
 		</div>
 	</script>
-	<script type="text/template" id="trainerAddRemoveStudent">
+	<script type="text/template" id="trainerAddRemoveStudentTemplate">
 		<div>
 			<label>Add Student :</label>
 			<div>
@@ -347,7 +318,7 @@ contact No :7709582219 -->
 			</div>
 		</div>
 	</script>
-	<script type="text/template" id="trainerScheduleReScheduleExam">
+	<script type="text/template" id="trainerScheduleReScheduleExamTemplate">
 		<div>
 			<label>Schedule an Examination :</label>
 			<div>
@@ -367,12 +338,12 @@ contact No :7709582219 -->
 		</div>
 	</script>
 	<script type="text/template" id="trainerTrainingReScheduleExamTemplate">
-		<label>Subject Name :</label> <input type="text" disabled="disabled" value='<@= subjectName >' id="trainerTrainingReScheduleSubjectName">
-		<label>Exam Id: </label><input type="text" disabled="disabled" value='<@= examId >' id="trainerTrainingReScheduleExamId">
-		<label>Exam Name :</label><input type="text" disabled="disabled" value='<@= examName >' id="trainerTrainingReScheduleExamName">
-		<label>Start Date :</label> <input type="text" value='<@= examStartDate >' id="trainerTrainingReScheduleDate">
-		<label title="Alloted time to solve an exam">Exam Hours :</label><input type="number" value='<@= examHours >' id="trainerTrainingReScheduleExamHours">
-		<label title="Time slot in which student can appear for exam">Total Time allotaed :</label> <input type="number" value='<@= examTotalTime >' id="trainerTrainingReScheduleExamTotalTime">
+		<label>Subject Name :</label> <input type="text" disabled="disabled" value='<@= subjectName @>' id="trainerTrainingReScheduleSubjectName">
+		<label>Exam Id: </label><input type="text" disabled="disabled" value='<@= examId @>' id="trainerTrainingReScheduleExamId">
+		<label>Exam Name :</label><input type="text" disabled="disabled" value='<@= examName @>' id="trainerTrainingReScheduleExamName">
+		<label>Start Date :</label> <input type="text" value='<@= examStartDate @>' id="trainerTrainingReScheduleDate">
+		<label title="Alloted time to solve an exam">Exam Hours :</label><input type="number" value='<@= examHours @>' id="trainerTrainingReScheduleExamHours">
+		<label title="Time slot in which student can appear for exam">Total Time allotaed :</label> <input type="number" value='<@= examTotalTime @>' id="trainerTrainingReScheduleExamTotalTime">
 		<input type="button">	
 	</script>
 	<!-- <div>

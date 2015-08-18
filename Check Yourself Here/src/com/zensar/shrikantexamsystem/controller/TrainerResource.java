@@ -33,7 +33,7 @@ public class TrainerResource {
 	public Trainer getTraineer(Trainer trainer){
 		String returnString="";
 		try {			
-			returnString = examServices.acceptTrainer(trainer);
+			 returnString = examServices.acceptTrainer(trainer);
 			} catch ( ServicesNotFoundException | SQLException e) {
 				returnString = "got error";				
 				System.out.println("We have got the sql exception ");

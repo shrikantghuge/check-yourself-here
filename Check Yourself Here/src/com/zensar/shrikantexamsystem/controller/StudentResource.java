@@ -34,7 +34,8 @@ public class StudentResource {
 			return studentServices.loginStudent(student);
 		} catch (SQLException | ServicesNotFoundException e) {		
 			e.printStackTrace();
-			return new Student("error", "" , "", 0, "", "");
+			//return new Student("error", "" , "", 0, "", "");
+			return null;
 		}
 	}
 }

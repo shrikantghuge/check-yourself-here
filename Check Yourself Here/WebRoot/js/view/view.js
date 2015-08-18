@@ -13,7 +13,7 @@
 		},
 		openSignupTemplate : function(){
 			Exam.mainSectionRegions.show(new Exam.SignupView());
-			
+			 window.location.hash = 'signUp';			
 		}
 	});
 	
@@ -34,6 +34,12 @@
 			Exam.loginRequestStudent(newStudent);
 		}
 	});
+	
+	
+	
+	
+	/*********************************************Trainer Views *********************************************************************************/
+	/*Trainer Login */
 	Exam.TrainerLoginView = Marionette.ItemView.extend({
 		template : '#trainerlogin-template',
 		events:{
@@ -46,14 +52,9 @@
 				Exam.checktrainerCredentials(trainer);
 			}			
 		}
-	});
-	Exam.TrainerHomeView = Marionette.ItemView.extend({
-		initialize : function() {
-			
-		},
-		template : '#trainerLoggedInMain-Template'
-			
-	});
+	});	
+	
+	
 	Exam.InvalidUserView= Marionette.ItemView.extend({
 		template : '#invalidUser-template'
 	});
@@ -83,6 +84,75 @@
 	});
 	
 	/*Session Expire, Page Reload , Back Button Session Expire*/
-Exam.InvalidSessionView = Marrionette.ItemView.extend({
-	template : "#sessionExpireTemplate"	
-});
+	Exam.InvalidSessionView = Marrionette.ItemView.extend({
+		template : "#sessionExpireTemplate"	
+	});
+	
+	/*Trainer Home Header*/
+	Exam.TrainerHomeHeaderView = Marionette.ItemView.extend({
+		initialize : function() {			
+		},
+		template : '#trainerHeadBannerTemplate'			
+	});
+	
+	/*After Trainer Log in this view will get render first*/
+	Exam.TrainerHomeMainView = Marionette.ItemView.extend({
+		initialize : function(){
+			
+		},
+		template : "#trainerHomeTemplate"		
+	});
+	
+	/*Trainer is able to edit profile information with the help of the View*/
+	Exam.TrainerHomeEditInfoView = Marionette.ItemView.extends({
+		initialize : function(){
+		},
+		template : "#trainerEditTemplate"
+	});
+	
+	/*Here trainer will be able to see the details of the students, subjects and Examinations*/
+	Exam.TrainerHomeStudentDetailsView = Marionette.ItemView.extends({
+		initialize : function() {			
+		},
+		template : "#trainerStudentDetailsTemplate"
+	});
+	
+	/*Training activities management main section of Trainer */
+	Exam.TrainerHomeTrainingsectionView = Marionette.ItemView.extends({
+		initialize : function() {
+			
+		},
+		template : "#trainerTrainingSectionTemplate"
+	});
+	
+	/*Trainer will be able to add or remove the subjects here*/
+	Exam.TrainerTSAddRemoveSubjectView = Marionette.ItemView.extends({
+		initialize : function(){
+			
+		},
+		template : "#trainerAddRemoveSubjectTemplate"
+	});
+	
+	/*Section to Add or Remove Students*/
+	Exam.TrainerTSAddRemoveStudentView = Marionette.ItemView.extends({
+		initialize : function(){
+			
+		},
+		template : "#trainerAddRemoveStudentTemplate"
+	});
+	
+	/*Scheduling and Rescheduling of an Examination */
+	Exam.TrainerTSScheduleRescheduleView = Marionette.ItemView.extends({
+		initialize : function(){
+			
+		},
+		template : "#trainerScheduleReScheduleExamTemplate"
+	});
+	
+	/*Reschedule Examination from here*/
+	Exam.TrainerTSReScheduleView = Marionette.ItemView.extends({
+		initialize : function(){
+			
+		},
+		template : "#trainerTrainingReScheduleExamTemplate"
+	});
