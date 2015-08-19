@@ -27,4 +27,4 @@ public interface ExamDAOServices {
 	public Trainer retrieveTrainer(Trainer trainer) throws SQLException;
 	public boolean insertStudentDetails(String filePath) throws SQLException, IOException;	
 */
-	public boolean setToken(Trainer trainerResult, int randomNum) throws ServicesNotFoundException;}
+	public boolean setToken(String id, int randomNum) throws ServicesNotFoundException;}

@@ -1,16 +1,11 @@
 package com.zensar.shrikantexamsystem.zenemsdaoservices;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 
-import com.zensar.shrikantexamsystem.beans.*;
+import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
 import com.zensar.shrikantexamsystem.serviceprovider.ConnectionProvider;
 public class ExamDAOServicesImpl implements ExamDAOServices{
@@ -255,10 +250,11 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		}
 	}
 	@Override
-	public boolean setToken(Trainer trainerResult, int randomNum) throws ServicesNotFoundException {		
+	public boolean setToken(String id, int randomNum) throws ServicesNotFoundException {		
 		try {
+			System.out.println("Before token insert : token value is --"+randomNum +"for person Id"+id);
 			Statement stmt = con.createStatement();
-			 if(stmt.executeUpdate("insert into person(token) values("+randomNum+")")>0){
+			 if(stmt.executeUpdate("insert into person(token) values("+randomNum+") where id='"+id+"'")>0){
 				 return true;
 			 }else{
 				 return false;

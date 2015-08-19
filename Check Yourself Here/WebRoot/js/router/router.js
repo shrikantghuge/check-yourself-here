@@ -29,6 +29,7 @@
 			'home' : 'showHome',
 			'student' : 'showStudent',
 			'trainer' : 'showTrainer'
+			
 		}
 	});
   

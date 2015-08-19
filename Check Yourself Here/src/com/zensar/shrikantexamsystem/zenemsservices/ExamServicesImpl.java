@@ -152,17 +152,16 @@ public class ExamServicesImpl implements ExamServices{
 		try {
 			trainerResult= emsdaoServices.retrieveTrainer(trainer.getId());		
 			if(trainerResult==null) throw new TrainerNotFoundException("There is no trainer associate with Id :"+trainer.getId());
-			if(trainerResult.getPassword()==trainer.getPassword().trim()){
-				int randomNum;
-				Random rn = new Random();
-				int n = 999999999 - 1111111111 + 1;
-				int i = rn.nextInt() % n;
-				randomNum =  1111111111 + i;
-				if(emsdaoServices.setToken(trainerResult ,randomNum)){
+			if(trainerResult.getPassword()==trainer.getPassword().trim()){	
+				System.out.println("password matched ");
+				int randomNum = getRandomNumber();
+				if(emsdaoServices.setToken(trainerResult.getId() ,randomNum)){
 					trainerResult.setPassword(randomNum+"");
 				}else{
 					throw new ServicesNotFoundException("Token number not set for "+trainer);
 				}							
+			}else{
+				throw new TrainerNotFoundException("Password incorrect !!");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -232,6 +231,16 @@ public class ExamServicesImpl implements ExamServices{
 			}while(emsdaoServices.retrieveTrainer(resultString)!=null);
 		}
 		return resultString;
+	}
+	private int getRandomNumber(){
+		System.out.println("Inside ramdom number generator");
+		int randomNum;
+		Random rn = new Random();
+		int n = 999999999 - 1111111111 + 1;
+		int i = rn.nextInt() % n;
+		randomNum =  1111111111 + i;
+		System.out.println("Random number generated as "+randomNum);
+		return randomNum;
 	}
 }
 

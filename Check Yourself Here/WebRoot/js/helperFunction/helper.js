@@ -14,7 +14,7 @@ Exam.loginRequestStudent = function(model) {
 			console.log("there is error in storing");
 		},
 		success : function(model) {
-			console.log("Politician updated successfully! response is: "+model);
+			console.log("student login response is: "+model);
 		}
 	});
 };
@@ -33,7 +33,9 @@ Exam.checktrainerCredentials = function(trainer) {
 			}
 			else{
 				console.log("trainer logined successfully json id"+model.toJSON().id);
-				Exam.mainSectionRegions.show(new Exam.TrainerHomeMainView({model: trainer}));				
+				Exam.topMenuRegions.show(new Exam.TrainerHomeHeaderView());
+				Exam.mainSectionRegions.show(new Exam.TrainerHomeMainView({model: trainer}));	
+				
 			}
 		}
 	});
@@ -52,7 +54,7 @@ Exam.saveNewRegistration = function(trainer){
 					Exam.mainSectionRegions.show(new Exam.SignupView());
 					$("#signUpError").css("visibility", "visible");
 				}else{
-					console.log("registrar has been saved successfully .."+modeltoJSON().id);
+					console.log("registrar has been saved successfully .."+model.toJSON().id);
 					Exam.mainSectionRegions.show(new Exam.SuccessView({model: model}));
 				}
 			}		
