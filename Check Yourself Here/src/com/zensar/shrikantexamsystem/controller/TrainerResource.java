@@ -58,9 +58,11 @@ public class TrainerResource {
 			try {
 				trainer = examServices.getTrainerLoginDetails(trainer);
 			} catch (TrainerNotFoundException e) {
+				System.out.println("Trainer not found Exception");
 				trainer = new Trainer("dataNotFound", "", "", "", null, 0, "");
 				e.printStackTrace();
 			} catch (ServicesNotFoundException e) {
+				e.printStackTrace();
 				trainer = new Trainer("error", "", "", "", null, 0, "");
 			}
 		}else{

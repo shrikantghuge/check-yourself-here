@@ -84,7 +84,7 @@
 	});
 	
 	/*Session Expire, Page Reload , Back Button Session Expire*/
-	Exam.InvalidSessionView = Marrionette.ItemView.extend({
+	Exam.InvalidSessionView = Marionette.ItemView.extend({
 		template : "#sessionExpireTemplate"	
 	});
 	
@@ -104,21 +104,21 @@
 	});
 	
 	/*Trainer is able to edit profile information with the help of the View*/
-	Exam.TrainerHomeEditInfoView = Marionette.ItemView.extends({
+	Exam.TrainerHomeEditInfoView = Marionette.ItemView.extend({
 		initialize : function(){
 		},
 		template : "#trainerEditTemplate"
 	});
 	
 	/*Here trainer will be able to see the details of the students, subjects and Examinations*/
-	Exam.TrainerHomeStudentDetailsView = Marionette.ItemView.extends({
+	Exam.TrainerHomeStudentDetailsView = Marionette.ItemView.extend({
 		initialize : function() {			
 		},
 		template : "#trainerStudentDetailsTemplate"
 	});
 	
 	/*Training activities management main section of Trainer */
-	Exam.TrainerHomeTrainingsectionView = Marionette.ItemView.extends({
+	Exam.TrainerHomeTrainingsectionView = Marionette.ItemView.extend({
 		initialize : function() {
 			
 		},
@@ -126,7 +126,7 @@
 	});
 	
 	/*Trainer will be able to add or remove the subjects here*/
-	Exam.TrainerTSAddRemoveSubjectView = Marionette.ItemView.extends({
+	Exam.TrainerTSAddRemoveSubjectView = Marionette.ItemView.extend({
 		initialize : function(){
 			
 		},
@@ -134,7 +134,7 @@
 	});
 	
 	/*Section to Add or Remove Students*/
-	Exam.TrainerTSAddRemoveStudentView = Marionette.ItemView.extends({
+	Exam.TrainerTSAddRemoveStudentView = Marionette.ItemView.extend({
 		initialize : function(){
 			
 		},
@@ -142,7 +142,7 @@
 	});
 	
 	/*Scheduling and Rescheduling of an Examination */
-	Exam.TrainerTSScheduleRescheduleView = Marionette.ItemView.extends({
+	Exam.TrainerTSScheduleRescheduleView = Marionette.ItemView.extend({
 		initialize : function(){
 			
 		},
@@ -150,7 +150,7 @@
 	});
 	
 	/*Reschedule Examination from here*/
-	Exam.TrainerTSReScheduleView = Marionette.ItemView.extends({
+	Exam.TrainerTSReScheduleView = Marionette.ItemView.extend({
 		initialize : function(){
 			
 		},

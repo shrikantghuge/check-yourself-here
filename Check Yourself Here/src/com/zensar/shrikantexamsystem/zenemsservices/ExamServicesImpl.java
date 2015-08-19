@@ -148,8 +148,9 @@ public class ExamServicesImpl implements ExamServices{
 	}*/
 	@Override
 	public Trainer getTrainerLoginDetails(Trainer trainer)throws TrainerNotFoundException, ServicesNotFoundException {
+		Trainer trainerResult;
 		try {
-			Trainer trainerResult= emsdaoServices.retrieveTrainer(trainer.getId());		
+			trainerResult= emsdaoServices.retrieveTrainer(trainer.getId());		
 			if(trainerResult==null) throw new TrainerNotFoundException("There is no trainer associate with Id :"+trainer.getId());
 			if(trainerResult.getPassword()==trainer.getPassword().trim()){
 				int randomNum;
@@ -160,15 +161,14 @@ public class ExamServicesImpl implements ExamServices{
 				if(emsdaoServices.setToken(trainerResult ,randomNum)){
 					trainerResult.setPassword(randomNum+"");
 				}else{
-					return new Trainer("error","", "", "", null, 0, "");
-				}
-				return trainerResult;			
+					throw new ServicesNotFoundException("Token number not set for "+trainer);
+				}							
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			throw new ServicesNotFoundException("Service Not Found", e);
 		}
-		return new Trainer("error","", "", "", null, 0, "");
+		return trainerResult;
 	}/*
 	@Override
 	public boolean getTraineeLoginDetails(int examId,Trainee trainee)throws TraineeNotFoundException, InvalidPasswordException,ServicesNotFoundException {

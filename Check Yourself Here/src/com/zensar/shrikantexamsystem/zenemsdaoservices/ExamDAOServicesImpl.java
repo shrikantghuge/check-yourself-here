@@ -245,8 +245,8 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		Statement stmt= conn.createStatement();
 		ResultSet rs=null;
 		try {			
-			rs = stmt.executeQuery("select * from person where Id='"+traineeId+"'");
-			if(rs.next()) return new Trainer(rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), null, rs.getLong(5), rs.getString(6));
+			rs = stmt.executeQuery("select * from person where Id='"+traineeId+"'");			
+			if(rs.next()) return new Trainer(rs.getString(1), rs.getString(2), rs.getString(5), rs.getString(4), null, rs.getLong(3), rs.getString(6));
 			else return null;
 		} finally{
 			//if(conn!=null) conn.close();
@@ -258,7 +258,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 	public boolean setToken(Trainer trainerResult, int randomNum) throws ServicesNotFoundException {		
 		try {
 			Statement stmt = con.createStatement();
-			 if(stmt.executeUpdate("insert into trainer(token) values('"+randomNum+"')")>0){
+			 if(stmt.executeUpdate("insert into person(token) values("+randomNum+")")>0){
 				 return true;
 			 }else{
 				 return false;

@@ -32,8 +32,8 @@ Exam.checktrainerCredentials = function(trainer) {
 				console.log("session expired");
 			}
 			else{
-				console.log("trainer logined successfully json id"+model.toJSON());
-				Exam.mainSectionRegions.show(new Exam.TrainerHomeView());				
+				console.log("trainer logined successfully json id"+model.toJSON().id);
+				Exam.mainSectionRegions.show(new Exam.TrainerHomeMainView({model: trainer}));				
 			}
 		}
 	});
@@ -52,7 +52,7 @@ Exam.saveNewRegistration = function(trainer){
 					Exam.mainSectionRegions.show(new Exam.SignupView());
 					$("#signUpError").css("visibility", "visible");
 				}else{
-					console.log("registrar has been saved successfully .."+model.toJSON().id);
+					console.log("registrar has been saved successfully .."+modeltoJSON().id);
 					Exam.mainSectionRegions.show(new Exam.SuccessView({model: model}));
 				}
 			}		
