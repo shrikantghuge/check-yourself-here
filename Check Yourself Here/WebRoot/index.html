@@ -5,8 +5,7 @@ contact No :7709582219 -->
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>Zensar Exam System</title>
-		<link rel="import" href="/templates/trainerTemplates/AllPages.html">
+		<title>Zensar Exam System</title>		
 		<link rel="stylesheet" href="css/main.css">
 		
 		<!--  JavaScript -->
@@ -100,14 +99,18 @@ contact No :7709582219 -->
 		<input type="button" value="Submit" id="submitTrainerLogin"> <input type="button" value="Sigh Up" id="signUpTrainer">
 		</form>
 	</script>
-	<script type="text/template" id="trainerLoggedInMaintopmenu-template">
-			<li><a href="#addDetails">Add Details</a></li>
-			<li><a href="#viewDetails">View Details</a></li>
-			<li><a href="#modifyDetails">Modify Details</a></li>
-			<li><a href="#trainerLogOut"> Logout </a> <li> 
-	</script>	
+			
 	<script type="text/template" id="invalidUser-template">
 		Your Username or Password is not correct
+	</script>
+	
+	<script type="text/template" id="sessionExpireTemplate">
+		<label>Session has been expired!! Please try again latter.</label>
+		<label> click <a href="#home">HERE</a> to play safe :)!!</label>
+	</script>
+	
+	<script type="text/template" id="somethingWentWrongtemplate">
+		<label>Something Went Wrong !! please contact @ shghuge@cisco.com</label>
 	</script>
 	<script type="text/template" id="signUp-template">
 		<div>
@@ -149,14 +152,11 @@ contact No :7709582219 -->
 			<label for="signUpError" id="signUpError" style="visibility: hidden; color: red;">Error In Storing, Please Try again!!</label>
 		</div>
 	</script>	
-		<script type="text/template" id="signUpSuccessTemplate">
+	<script type="text/template" id="signUpSuccessTemplate">
 		<label> Your ID is : <@= id  @> </label> </br> 
 		<label> click <a href="#home">HERE</a> to login!!</label>
 	</script>
-		<script type="text/template" id="sessionExpireTemplate">
-		<label>Session has been expired!! Please try again latter.</label>
-		<label> click <a href="#home">HERE</a> to play safe :)!!</label>
-	</script>	
+			
 	<script type="text/template" id="trainerHeadBannerTemplate">
 		<div>
 			<ul>
@@ -164,7 +164,7 @@ contact No :7709582219 -->
 				<li><a href="#trainerProfile">Edit Profile</a></li>
 				<li><a href="#trainerStudentDetails">Students Details</a></li>
 				<li><a href="#trainerTraining">Training Details</a></li>
-				<li><a href="#logout">Logout</a></li>
+				<li><a href="#trainerLogout">Logout</a></li>
 			</ul>		
 		</div>
 	</script>
@@ -223,9 +223,10 @@ contact No :7709582219 -->
 						<td><input type="text" value='<@= address @>' id="tEditAddress"/></td>					
 					</tr>
 				</table>	
+				<input type="button" id="tEditSubmit">	
 			</div>
 		</div>	
-	</script>
+	</script>	
 	<script type="text/template" id="trainerStudentDetailsTemplate">
 		<div>
 			<label>Student Details : </label>

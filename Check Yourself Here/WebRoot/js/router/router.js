@@ -19,18 +19,72 @@
 			console.info('this section for home');
 			Exam.mainSectionRegions.show(new Exam.MainSectionView());
 			
+		}	
+	});
+	
+	/***************Controllers for trainer home***************/
+	Exam.TrainerHomeController = Marionette.Controller.extend({
+		initialize : function(model) {
+			console.log("Trainer Controller has been initialized with data id :"+model.toJSON().id);
+			Exam.topMenuRegions.show(new Exam.TrainerHomeHeaderView());
+			Exam.mainSectionRegions.show(new Exam.TrainerHomeMainView({model: model}));
+		},
+		showTrainerHome : function() {
+			var model = Exam.getTrainerHelper();
+			console.log("the model fetched successfully is :"+model);
+			if(model.toJSON().id=="sessionError"){
+				Exam.mainSectionRegions.show(new Exam.InvalidSessionView());
+			}else if(model.toJSON().id=="somethingWentWrong"){
+				Exam.mainSectionRegions.show(new Exam.SomethingWentWrongView());
+			}else{
+				console.log("Display trainer home");
+				Exam.mainSectionRegions.show(new Exam.TrainerHomeMainView({model: model}));
+			}	
+		},
+		showTrainerProfile : function() {			
+			var model =Exam.getTrainerHelper();
+			console.log("trainer profile :the model fetched successfully is :"+model);
+			if(model.toJSON().id=="sessionError"){
+				Exam.mainSectionRegions.show(new Exam.InvalidSessionView());
+			}else if(model.toJSON().id=="somethingWentWrong"){
+				Exam.mainSectionRegions.show(new Exam.SomethingWentWrongView());
+			}else{
+				console.log("Display trainer profile");
+				Exam.mainSectionRegions.show(new Exam.TrainerHomeEditInfoView({model: model}));
+			}				 
+		},
+		showTrainerStudentDetails : function() {
+			
+		},
+		showTrainerTraining : function() {
+			
+		},
+		showTrainerLogout : function() {
+			
 		}
 	});
 	
 	
-  // All routers 
+  // ALL ROUTERS
+	/*Main router before login activities*/
 	Exam.MainRouter = Marionette.AppRouter.extend({
 		appRoutes : {
 			'home' : 'showHome',
 			'student' : 'showStudent',
 			'trainer' : 'showTrainer'
-			
 		}
 	});
+	/*Trainer  routers, after trainer login activities*/
+	Exam.TrainerRouter = Marionette.AppRouter.extend({
+		appRoutes : {
+			'trainerHome' :  'showTrainerHome',
+			'trainerProfile' :	'showTrainerProfile',
+			'trainerStudentDetails' :	'showTrainerStudentDetails',
+			'trainerTraining'	:	'showTrainerTraining',
+			'trainerLogout' :	'showTrainerLogout'	
+		}
+	});
+	
+	
   
 	

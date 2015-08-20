@@ -33,8 +33,12 @@ Exam.checktrainerCredentials = function(trainer) {
 			}
 			else{
 				console.log("trainer logined successfully json id"+model.toJSON().id);
-				Exam.topMenuRegions.show(new Exam.TrainerHomeHeaderView());
-				Exam.mainSectionRegions.show(new Exam.TrainerHomeMainView({model: trainer}));	
+				localStorage.setItem("uId",model.toJSON().id);
+				localStorage.setItem("password",model.toJSON().password);
+				console.log("The Items stored in HTML local are :"+localStorage.getItem("uId")+"and pwd is :"+localStorage.getItem("password"));
+				new Exam.TrainerRouter({
+					controller : new Exam.TrainerHomeController(model)
+				});
 				
 			}
 		}
@@ -60,6 +64,29 @@ Exam.saveNewRegistration = function(trainer){
 			}		
         }
     );
+};
+
+/*This fetches the trainer basic details for Home view 
+ * input: localStorage (uId and Password)
+ * returns : trainer object
+ * */
+Exam.getTrainerHelper = function() {
+	var result=null;
+	var trainer = new Exam.Trainer({	
+					id : localStorage.getItem("uId"),
+					password : localStorage.getItem("password")
+				});
+	trainer.urlRoot = "./exam/trainer";
+	console.log("before fetch");
+	trainer.save({},{
+		async: false, 
+		success: function(model){
+			console.log("Trainer fetched successfully "+model.toJSON().id);
+			result=model;
+		}
+	});
+	console.log("after fetch"+result);
+	return result;
 };
 
 	

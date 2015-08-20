@@ -3,6 +3,7 @@ import java.sql.SQLException;
 
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
+import com.zensar.shrikantexamsystem.exceptions.SessionExpireException;
 import com.zensar.shrikantexamsystem.exceptions.TrainerNotFoundException;
 
 public interface ExamServices {
@@ -29,4 +30,6 @@ public interface ExamServices {
 */
 
 	Trainer getTrainerLoginDetails(Trainer trainer)throws TrainerNotFoundException, ServicesNotFoundException;
+
+	public Trainer getTrainerDetails(Trainer trainer) throws TrainerNotFoundException, SessionExpireException, ServicesNotFoundException;
 	}

@@ -1,4 +1,5 @@
 // All the views declaration staring 
+	/*********************************************MAIN PAGE VIEWS : START***********************************************************************/
 	Exam.TopHeaderView = Marionette.ItemView.extend({
 		template : '#top-header-template'
 	});
@@ -33,12 +34,24 @@
 			});
 			Exam.loginRequestStudent(newStudent);
 		}
+	});	
+	/*********************************************MAIN PAGE VIEWS : START***********************************************************************/
+	/********************************************************ERROR VIEWS : START***************************************************************/
+	/*View to show invalid user credentials */
+	Exam.InvalidUserView= Marionette.ItemView.extend({
+		template : '#invalidUser-template'
 	});
 	
-	
-	
-	
-	/*********************************************Trainer Views *********************************************************************************/
+	/*Session Expire, Page Reload , Back Button Session Expire*/
+	Exam.InvalidSessionView = Marionette.ItemView.extend({
+		template : "#sessionExpireTemplate"	
+	});
+	/*Something went wrong view*/
+	Exam.SomethingWentWrongView = Marionette.ItemView.extend({
+		template : "#somethingWentWrongtemplate"
+	});
+	/********************************************************ERROR VIEWS : END***************************************************************/		
+	/*********************************************TRAINER VIEWS : START***********************************************************************/
 	/*Trainer Login */
 	Exam.TrainerLoginView = Marionette.ItemView.extend({
 		template : '#trainerlogin-template',
@@ -52,12 +65,7 @@
 				Exam.checktrainerCredentials(trainer);
 			}			
 		}
-	});	
-	
-	
-	Exam.InvalidUserView= Marionette.ItemView.extend({
-		template : '#invalidUser-template'
-	});
+	});		
 	
 	/*Trainer Signup View*/
 	Exam.SignupView = Marionette.ItemView.extend({
@@ -81,12 +89,8 @@
 	/*Trainer successful signup template */
 	Exam.SuccessView = Marionette.ItemView.extend({
 		template : "#signUpSuccessTemplate"		
-	});
+	});	
 	
-	/*Session Expire, Page Reload , Back Button Session Expire*/
-	Exam.InvalidSessionView = Marionette.ItemView.extend({
-		template : "#sessionExpireTemplate"	
-	});
 	
 	/*Trainer Home Header*/
 	Exam.TrainerHomeHeaderView = Marionette.ItemView.extend({
@@ -156,3 +160,5 @@
 		},
 		template : "#trainerTrainingReScheduleExamTemplate"
 	});
+	/*********************************************TRAINER VIEWS : END***********************************************************************/
+	

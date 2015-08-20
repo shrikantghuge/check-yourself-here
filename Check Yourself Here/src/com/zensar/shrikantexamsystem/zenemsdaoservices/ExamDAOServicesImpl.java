@@ -250,11 +250,26 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		}
 	}
 	@Override
+	public Trainer retrieveTrainerWithToken(String traineeId)throws SQLException {
+		Connection conn=con;
+		Statement stmt= conn.createStatement();
+		ResultSet rs=null;
+		try {			
+			rs = stmt.executeQuery("select * from person where Id='"+traineeId+"'");			
+			if(rs.next()) return new Trainer(rs.getString(1), rs.getString(2), rs.getString(5), rs.getString(4), null, rs.getLong(3), rs.getInt(8)+"");
+			else return null;
+		} finally{
+			//if(conn!=null) conn.close();
+			if(rs!=null) rs.close();
+			if(stmt!=null) stmt.close();
+		}
+	}
+	@Override
 	public boolean setToken(String id, int randomNum) throws ServicesNotFoundException {		
 		try {
 			System.out.println("Before token insert : token value is --"+randomNum +"for person Id"+id);
 			Statement stmt = con.createStatement();
-			 if(stmt.executeUpdate("insert into person(token) values("+randomNum+") where id='"+id+"'")>0){
+			 if(stmt.executeUpdate("update person  set token = "+randomNum+" where id='"+id+"'")>0){
 				 return true;
 			 }else{
 				 return false;
@@ -264,6 +279,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 			throw new ServicesNotFoundException("Service Not found");
 		}		
 	}
+	
 
 	/*@Override
 	public boolean updateExam(Exam exam) throws SQLException {

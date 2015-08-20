@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
+import com.zensar.shrikantexamsystem.exceptions.SessionExpireException;
 import com.zensar.shrikantexamsystem.exceptions.TrainerNotFoundException;
 import com.zensar.shrikantexamsystem.zenemsservices.ExamServices;
 import com.zensar.shrikantexamsystem.zenemsservices.ExamServicesImpl;
@@ -45,14 +46,15 @@ public class TrainerResource {
 		return new Trainer(returnString, "", "", "", null, 0, ""); 
 	}
 	
+	/*method to check trainer login credentials 
+	 * input  : id, password
+	 * output : trainer object
+	 * */	
 	@PUT
 	@Path("login/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	//public Trainer loginTrainer(@PathParam("id") String id, @QueryParam("password")String password) {
+	@Consumes(MediaType.APPLICATION_JSON)	
 	public Trainer loginTrainer(Trainer trainer) {
-		//Trainer trainer = new Trainer(id, "", "", "", null, 0, password);;
-		//if(id != null && password != null){
 		System.out.println("trainer object caught from client "+trainer);
 		if(trainer!=null){
 			try {
@@ -63,13 +65,40 @@ public class TrainerResource {
 				e.printStackTrace();
 			} catch (ServicesNotFoundException e) {
 				e.printStackTrace();
-				trainer = new Trainer("error", "", "", "", null, 0, "");
+				trainer = new Trainer("sessionError", "", "", "", null, 0, "");
 			}
 		}else{
-			trainer = new Trainer("error", "", "", "", null, 0, "");
+			trainer = new Trainer("sessionError", "", "", "", null, 0, "");
 		}
 		System.out.println("Trainer value in Resource Handeler :"+trainer);
 		return trainer;
+	}
+	
+	
+	/*Method to fetch trainer's basic details
+	 * input  : id, token
+	 * output : the trainer object 
+	 * */
+	@PUT
+	@Path("{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Trainer fetchTrainerDetails(Trainer trainer){
+		Trainer trainerResult;
+		try {
+			trainerResult = examServices.getTrainerDetails(trainer);
+		} catch (TrainerNotFoundException e) {			
+			e.printStackTrace();
+			return new Trainer("sessionError", "", "", "", null, 0, "");
+		} catch (SessionExpireException e) {			
+			e.printStackTrace();
+			return new Trainer("sessionError", "", "", "", null, 0, "");
+		} catch (ServicesNotFoundException e) {
+			e.printStackTrace();
+			return new Trainer("somethingWentWrong", "", "", "", null, 0, "");			
+		} 
+		return trainerResult;
+		
 	}
 	
 }

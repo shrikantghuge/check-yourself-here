@@ -7,6 +7,7 @@ import java.util.Random;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
+import com.zensar.shrikantexamsystem.exceptions.SessionExpireException;
 import com.zensar.shrikantexamsystem.exceptions.TrainerNotFoundException;
 import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServices;
 import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServicesImpl;
@@ -150,9 +151,10 @@ public class ExamServicesImpl implements ExamServices{
 	public Trainer getTrainerLoginDetails(Trainer trainer)throws TrainerNotFoundException, ServicesNotFoundException {
 		Trainer trainerResult;
 		try {
-			trainerResult= emsdaoServices.retrieveTrainer(trainer.getId());		
+			trainerResult= emsdaoServices.retrieveTrainer(trainer.getId());	
+			System.out.println("Trainer fetched from database is :"+trainerResult);
 			if(trainerResult==null) throw new TrainerNotFoundException("There is no trainer associate with Id :"+trainer.getId());
-			if(trainerResult.getPassword()==trainer.getPassword().trim()){	
+			if(trainerResult.getPassword().equals(trainer.getPassword().trim())){	
 				System.out.println("password matched ");
 				int randomNum = getRandomNumber();
 				if(emsdaoServices.setToken(trainerResult.getId() ,randomNum)){
@@ -241,6 +243,26 @@ public class ExamServicesImpl implements ExamServices{
 		randomNum =  1111111111 + i;
 		System.out.println("Random number generated as "+randomNum);
 		return randomNum;
+	}
+	@Override
+	public Trainer getTrainerDetails(Trainer trainer) throws TrainerNotFoundException, SessionExpireException, ServicesNotFoundException {
+		try {
+			Trainer fetchedTrainer = emsdaoServices.retrieveTrainerWithToken(trainer.getId());
+			System.out.println("The fetched trainer in getTrainerDetails is :"+fetchedTrainer);
+			if(fetchedTrainer==null){
+				throw new TrainerNotFoundException("The trainer :"+trainer+" : doesnot exist");
+			}else{
+				if(trainer.getPassword().equals(fetchedTrainer.getPassword())){
+					return fetchedTrainer;
+				}else{
+					throw new SessionExpireException("The token doesnot matched , Invalid session");
+				}
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new  ServicesNotFoundException("Something went wrong at sql side");			
+		}		
 	}
 }
 
