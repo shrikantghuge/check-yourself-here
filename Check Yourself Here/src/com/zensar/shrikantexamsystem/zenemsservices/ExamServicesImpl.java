@@ -4,6 +4,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
@@ -13,6 +16,7 @@ import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServices;
 import com.zensar.shrikantexamsystem.zenemsdaoservices.ExamDAOServicesImpl;
 
 public class ExamServicesImpl implements ExamServices{
+	public static final Logger LOGGER = LoggerFactory.getLogger(ExamServicesImpl.class);
 	ExamDAOServices emsdaoServices;
 	public ExamServicesImpl() throws ServicesNotFoundException {
 		try {
@@ -152,10 +156,10 @@ public class ExamServicesImpl implements ExamServices{
 		Trainer trainerResult;
 		try {
 			trainerResult= emsdaoServices.retrieveTrainer(trainer.getId());	
-			System.out.println("Trainer fetched from database is :"+trainerResult);
+			LOGGER.info("Trainer fetched from database is :"+trainerResult);
 			if(trainerResult==null) throw new TrainerNotFoundException("There is no trainer associate with Id :"+trainer.getId());
 			if(trainerResult.getPassword().equals(trainer.getPassword().trim())){	
-				System.out.println("password matched ");
+				LOGGER.info("password matched ");
 				int randomNum = getRandomNumber();
 				if(emsdaoServices.setToken(trainerResult.getId() ,randomNum)){
 					trainerResult.setPassword(randomNum+"");
@@ -202,7 +206,7 @@ public class ExamServicesImpl implements ExamServices{
 		if(trainerOrStudent.equalsIgnoreCase("trainer")){
 			do{
 				String nameWOSpaces=trainer.getName().replaceAll("\\s+", "");			
-				System.out.println("Name without spaces is :"+nameWOSpaces);
+				LOGGER.info("Name without spaces is :"+nameWOSpaces);
 				if(nameWOSpaces.length()<7){
 					RandomString randomString = new RandomString(7-nameWOSpaces.length());
 					resultString= nameWOSpaces +  randomString.nextString();
@@ -213,12 +217,12 @@ public class ExamServicesImpl implements ExamServices{
 					resultString = nameWOSpaces.substring(index,index+7);
 					index++;
 				}			
-				System.out.println("The Trainer result string is "+resultString +" And data retrived"+emsdaoServices.retrieveTrainer(resultString));
+				LOGGER.info("The Trainer result string is "+resultString +" And data retrived"+emsdaoServices.retrieveTrainer(resultString));
 			}while(emsdaoServices.retrieveTrainer(resultString)!=null);
 		}else{
 			do{
 				String nameWOSpaces=trainer.getName().replaceAll("\\s+", "");			
-				System.out.println("Name without spaces is :"+nameWOSpaces);
+				LOGGER.info("Name without spaces is :"+nameWOSpaces);
 				if(nameWOSpaces.length()<7){
 					RandomString randomString = new RandomString(7-nameWOSpaces.length());
 					resultString= nameWOSpaces +  randomString.nextString();
@@ -229,26 +233,26 @@ public class ExamServicesImpl implements ExamServices{
 					resultString = nameWOSpaces.substring(index,index+7);
 					index++;
 				}			
-				System.out.println("The Trainer result string is "+resultString +" And data retrived"+emsdaoServices.retrieveTrainer(resultString));
+				LOGGER.info("The Trainer result string is "+resultString +" And data retrived"+emsdaoServices.retrieveTrainer(resultString));
 			}while(emsdaoServices.retrieveTrainer(resultString)!=null);
 		}
 		return resultString;
 	}
 	private int getRandomNumber(){
-		System.out.println("Inside ramdom number generator");
+		LOGGER.info("Inside ramdom number generator");
 		int randomNum;
 		Random rn = new Random();
 		int n = 999999999 - 1111111111 + 1;
 		int i = rn.nextInt() % n;
 		randomNum =  1111111111 + i;
-		System.out.println("Random number generated as "+randomNum);
+		LOGGER.info("Random number generated as "+randomNum);
 		return randomNum;
 	}
 	@Override
 	public Trainer getTrainerDetails(Trainer trainer) throws TrainerNotFoundException, SessionExpireException, ServicesNotFoundException {
 		try {
 			Trainer fetchedTrainer = emsdaoServices.retrieveTrainerWithToken(trainer.getId());
-			System.out.println("The fetched trainer in getTrainerDetails is :"+fetchedTrainer);
+			LOGGER.info("The fetched trainer in getTrainerDetails is :"+fetchedTrainer);
 			if(fetchedTrainer==null){
 				throw new TrainerNotFoundException("The trainer :"+trainer+" : doesnot exist");
 			}else{

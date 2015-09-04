@@ -5,10 +5,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
 import com.zensar.shrikantexamsystem.serviceprovider.ConnectionProvider;
+import com.zensar.shrikantexamsystem.zenemsservices.ExamServicesImpl;
 public class ExamDAOServicesImpl implements ExamDAOServices{
+	public static final Logger LOGGER = LoggerFactory.getLogger(ExamServicesImpl.class);
 	PreparedStatement pstmt;
 	ResultSet rs;
 	Connection con;
@@ -267,7 +272,7 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 	@Override
 	public boolean setToken(String id, int randomNum) throws ServicesNotFoundException {		
 		try {
-			System.out.println("Before token insert : token value is --"+randomNum +"for person Id"+id);
+			LOGGER.info("Before token insert : token value is --"+randomNum +"for person Id"+id);
 			Statement stmt = con.createStatement();
 			 if(stmt.executeUpdate("update person  set token = "+randomNum+" where id='"+id+"'")>0){
 				 return true;

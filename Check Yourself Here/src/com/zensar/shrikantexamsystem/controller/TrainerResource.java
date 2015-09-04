@@ -8,6 +8,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.zensar.shrikantexamsystem.beans.Trainer;
 import com.zensar.shrikantexamsystem.exceptions.ServicesNotFoundException;
 import com.zensar.shrikantexamsystem.exceptions.SessionExpireException;
@@ -17,10 +20,11 @@ import com.zensar.shrikantexamsystem.zenemsservices.ExamServicesImpl;
 @Path("/trainer")
 public class TrainerResource {
 	private ExamServices examServices;
+	private static final Logger LOGGER = LoggerFactory.getLogger(ExamResource.class);
 	public TrainerResource() {
 		try {
 			examServices = new ExamServicesImpl();
-			System.out.println("inside Trainer Resource Constructor");
+			LOGGER.info("inside Trainer Resource Constructor");
 		} catch (ServicesNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,7 +41,7 @@ public class TrainerResource {
 			 returnString = examServices.acceptTrainer(trainer);
 			} catch ( ServicesNotFoundException | SQLException e) {
 				returnString = "got error";				
-				System.out.println("We have got the sql exception ");
+				LOGGER.info("We have got the sql exception ");
 				e.printStackTrace();
 			} catch (Exception e) {
 				returnString = "got error";
@@ -55,12 +59,12 @@ public class TrainerResource {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)	
 	public Trainer loginTrainer(Trainer trainer) {
-		System.out.println("trainer object caught from client "+trainer);
+		LOGGER.info("trainer object caught from client "+trainer);
 		if(trainer!=null){
 			try {
 				trainer = examServices.getTrainerLoginDetails(trainer);
 			} catch (TrainerNotFoundException e) {
-				System.out.println("Trainer not found Exception");
+				LOGGER.info("Trainer not found Exception");
 				trainer = new Trainer("dataNotFound", "", "", "", null, 0, "");
 				e.printStackTrace();
 			} catch (ServicesNotFoundException e) {
@@ -70,7 +74,7 @@ public class TrainerResource {
 		}else{
 			trainer = new Trainer("sessionError", "", "", "", null, 0, "");
 		}
-		System.out.println("Trainer value in Resource Handeler :"+trainer);
+		LOGGER.info("Trainer value in Resource Handeler :"+trainer);
 		return trainer;
 	}
 	
