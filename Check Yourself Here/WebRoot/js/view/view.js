@@ -111,7 +111,21 @@
 	Exam.TrainerHomeEditInfoView = Marionette.ItemView.extend({
 		initialize : function(){
 		},
-		template : "#trainerEditTemplate"
+		template : "#trainerEditTemplate",
+		events : {
+				"click #tEditSubmit" : function(){
+					var newTrainer = Exam.Trainer({
+						id : localStorage.getItem("uId"),
+						name : $("#tEditName").val(),
+						contactNumber : $("#tEditContactNumber").val(),
+						email : #("#tEditEmailId").val(),
+						
+						
+					
+					});
+					
+				}
+		}		
 	});
 	
 	/*Here trainer will be able to see the details of the students, subjects and Examinations*/

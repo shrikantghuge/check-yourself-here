@@ -255,12 +255,12 @@ public class ExamDAOServicesImpl implements ExamDAOServices{
 		}
 	}
 	@Override
-	public Trainer retrieveTrainerWithToken(String traineeId)throws SQLException {
+	public Trainer retrieveTrainer(String traineeId,int token)throws SQLException {
 		Connection conn=con;
 		Statement stmt= conn.createStatement();
 		ResultSet rs=null;
 		try {			
-			rs = stmt.executeQuery("select * from person where Id='"+traineeId+"'");			
+			rs = stmt.executeQuery("select * from person where Id='"+traineeId+"' and token ="+token);			
 			if(rs.next()) return new Trainer(rs.getString(1), rs.getString(2), rs.getString(5), rs.getString(4), null, rs.getLong(3), rs.getInt(8)+"");
 			else return null;
 		} finally{

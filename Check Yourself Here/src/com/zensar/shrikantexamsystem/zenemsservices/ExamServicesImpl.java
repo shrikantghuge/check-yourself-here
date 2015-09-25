@@ -251,21 +251,16 @@ public class ExamServicesImpl implements ExamServices{
 	@Override
 	public Trainer getTrainerDetails(Trainer trainer) throws TrainerNotFoundException, SessionExpireException, ServicesNotFoundException {
 		try {
-			Trainer fetchedTrainer = emsdaoServices.retrieveTrainerWithToken(trainer.getId());
+			Trainer fetchedTrainer = emsdaoServices.retrieveTrainer(trainer.getId(),Integer.parseInt(trainer.getPassword()));
 			LOGGER.info("The fetched trainer in getTrainerDetails is :"+fetchedTrainer);
 			if(fetchedTrainer==null){
-				throw new TrainerNotFoundException("The trainer :"+trainer+" : doesnot exist");
-			}else{
-				if(trainer.getPassword().equals(fetchedTrainer.getPassword())){
-					return fetchedTrainer;
-				}else{
-					throw new SessionExpireException("The token doesnot matched , Invalid session");
-				}
-			}
-			
+				throw new SessionExpireException("The trainer :"+trainer+" : doesnot exist");
+			}else{				
+				return fetchedTrainer;				
+			}			
 		} catch (SQLException e) {
 			e.printStackTrace();
-			throw new  ServicesNotFoundException("Something went wrong at sql side");			
+			throw new  ServicesNotFoundException("Something went wrong at database side");			
 		}		
 	}
 }

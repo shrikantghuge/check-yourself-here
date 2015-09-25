@@ -63,6 +63,9 @@ public class TrainerResource {
 		if(trainer!=null){
 			try {
 				trainer = examServices.getTrainerLoginDetails(trainer);
+				if(trainer == null){
+					return new Trainer("sessionError", "", "", "", null, 0, "");
+				}
 			} catch (TrainerNotFoundException e) {
 				LOGGER.info("Trainer not found Exception");
 				trainer = new Trainer("dataNotFound", "", "", "", null, 0, "");
