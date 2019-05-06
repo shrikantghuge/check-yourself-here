@@ -1,5 +1,7 @@
 package com.mulesoft.support;
 
+import java.util.Arrays;
+
 import org.mule.api.MuleEventContext;
 import org.mule.api.endpoint.ImmutableEndpoint;
 import org.mule.api.registry.MuleRegistry;
@@ -23,8 +25,11 @@ public class SftpReSftpCreateFolder implements org.mule.api.lifecycle.Callable
     
 
 
-   // client.mkdir((String)endpoint.getProperty("outputPattern"));
-    client.mkdir(eventContext.getMessage().getInvocationProperty("soutputPattern"));
+   // client.mkdir((String)endpoint.getProperty(accc"outputPattern"));
+   if(!Arrays.asList(client.listDirectories()).contains(eventContext.getMessage().getInvocationProperty("soutputPattern"))){
+	   client.mkdir(eventContext.getMessage().getInvocationProperty("soutputPattern"));
+   }
+   
     //eventContext.getMuleContext().getRegistry().get("soutputPattern")
     
 
