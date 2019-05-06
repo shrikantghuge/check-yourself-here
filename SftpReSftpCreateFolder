@@ -1,0 +1,34 @@
+package com.mulesoft.support;
+
+import org.mule.api.MuleEventContext;
+import org.mule.api.endpoint.ImmutableEndpoint;
+import org.mule.api.registry.MuleRegistry;
+import org.mule.endpoint.EndpointURIEndpointBuilder;
+import org.mule.transport.sftp.SftpClient;
+import org.mule.transport.sftp.SftpConnector;
+
+public class SftpReSftpCreateFolder implements org.mule.api.lifecycle.Callable
+{
+  public SftpReSftpCreateFolder() {}
+  
+  public Object onCall(MuleEventContext eventContext) throws Exception
+  {
+    SftpConnector connector = (SftpConnector)eventContext.getMuleContext().getRegistry().lookupConnector("SFTP-Configuration");
+    
+
+    ImmutableEndpoint endpoint = ((EndpointURIEndpointBuilder)eventContext.getMuleContext().getRegistry().lookupObject("SftpEP")).buildOutboundEndpoint();
+    
+    SftpClient client = connector.createSftpClient(endpoint);
+    client.changeWorkingDirectory(endpoint.getEndpointURI().getUri().getPath());
+    
+
+
+   // client.mkdir((String)endpoint.getProperty("outputPattern"));
+    client.mkdir(eventContext.getMessage().getInvocationProperty("soutputPattern"));
+    //eventContext.getMuleContext().getRegistry().get("soutputPattern")
+    
+
+    connector.releaseClient(endpoint, client);
+    return eventContext.getMessage().getPayload();
+  }
+}
