@@ -26,8 +26,8 @@ public class SftpReSftpCreateFolder implements org.mule.api.lifecycle.Callable
 
 
    // client.mkdir((String)endpoint.getProperty(accc"outputPattern"));
-   if(!Arrays.asList(client.listDirectories()).contains(eventContext.getMessage().getInvocationProperty("soutputPattern"))){
-	   client.mkdir(eventContext.getMessage().getInvocationProperty("soutputPattern"));
+   if(!Arrays.asList(client.listDirectories()).contains((String)eventContext.getMessage().getInvocationProperty("soutputPattern"))){
+	   client.mkdir((String)eventContext.getMessage().getInvocationProperty("soutputPattern"));
    }
    
     //eventContext.getMuleContext().getRegistry().get("soutputPattern")
